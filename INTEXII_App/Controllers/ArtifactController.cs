@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
+    //testing line 13 for authorization...
+    [Authorize]
     public class ArtifactController : Controller
     {
         private readonly BYU_Excavation_2Context _context;

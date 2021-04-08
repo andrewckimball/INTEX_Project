@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using INTEXII_App.Models;
+using INTEXII_App.Areas.Identity.Data;
 
 namespace INTEXII_App
 {
@@ -28,19 +29,22 @@ namespace INTEXII_App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+                //options.UseSqlite(
+                   // Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //.AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
             services.AddDbContext<BYU_Excavation_2Context>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:ExcavationConnectionString"]);
             });
+
+            //trying to figure out login rn
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +66,7 @@ namespace INTEXII_App
 
             app.UseRouting();
 
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -71,6 +76,7 @@ namespace INTEXII_App
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+            
             });
         }
     }
