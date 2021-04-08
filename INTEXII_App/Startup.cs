@@ -12,6 +12,7 @@ using INTEXII_App.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using INTEXII_App.Models;
 
 namespace INTEXII_App
 {
@@ -35,6 +36,11 @@ namespace INTEXII_App
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddDbContext<BYU_Excavation_2Context>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:ExcavationConnectionString"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

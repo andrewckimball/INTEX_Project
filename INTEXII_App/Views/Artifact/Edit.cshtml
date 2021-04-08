@@ -1,0 +1,69 @@
+@model INTEXII_App.Models.Artifact
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Artifact</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ArtifactId" />
+            <div class="form-group">
+                <label asp-for="AreaId" class="control-label"></label>
+                <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId"></select>
+                <span asp-validation-for="AreaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuadrantCardinalityId" class="control-label"></label>
+                <select asp-for="QuadrantCardinalityId" class="form-control" asp-items="ViewBag.QuadrantCardinalityId"></select>
+                <span asp-validation-for="QuadrantCardinalityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateFound" class="control-label"></label>
+                <input asp-for="DateFound" class="form-control" />
+                <span asp-validation-for="DateFound" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviouslySampled" class="control-label"></label>
+                <input asp-for="PreviouslySampled" class="form-control" />
+                <span asp-validation-for="PreviouslySampled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BurialDepth" class="control-label"></label>
+                <input asp-for="BurialDepth" class="form-control" />
+                <span asp-validation-for="BurialDepth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rack" class="control-label"></label>
+                <input asp-for="Rack" class="form-control" />
+                <span asp-validation-for="Rack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bag" class="control-label"></label>
+                <input asp-for="Bag" class="form-control" />
+                <span asp-validation-for="Bag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BurialNumber" class="control-label"></label>
+                <input asp-for="BurialNumber" class="form-control" />
+                <span asp-validation-for="BurialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
