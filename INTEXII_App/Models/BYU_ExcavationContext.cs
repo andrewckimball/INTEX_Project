@@ -78,7 +78,7 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.Artifacts)
                     .HasForeignKey(d => d.BurialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Artifact__Burial__7A3223E8");
+                    .HasConstraintName("FK__Artifact__Burial__12FDD1B2");
             });
 
             modelBuilder.Entity<BiologicalSample>(entity =>
@@ -118,7 +118,7 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.BiologicalSamples)
                     .HasForeignKey(d => d.BurialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Biologica__Buria__719CDDE7");
+                    .HasConstraintName("FK__Biologica__Buria__0A688BB1");
             });
 
             modelBuilder.Entity<Burial>(entity =>
@@ -168,14 +168,12 @@ namespace INTEXII_App.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.BurialDepth).HasColumnType("decimal(18, 0)");
-
                 entity.Property(e => e.BurialGenderMethod)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.BurialNumber)
-                    .HasMaxLength(100)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.BurialPreservation)
@@ -200,9 +198,9 @@ namespace INTEXII_App.Models
 
                 entity.Property(e => e.DateOnSkull).HasColumnType("datetime");
 
-                entity.Property(e => e.DecimalerorbitalBreadth)
-                    .HasColumnType("decimal(18, 0)")
-                    .HasColumnName("decimalerorbitalBreadth");
+                entity.Property(e => e.DecimalerorbitalBreadth).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.Depth).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(5000)
@@ -213,10 +211,6 @@ namespace INTEXII_App.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.DorsalPitting).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.EastToFeet).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.EastToHead).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.EpiphysealUnion)
                     .HasMaxLength(20)
@@ -266,11 +260,7 @@ namespace INTEXII_App.Models
 
                 entity.Property(e => e.IliacCrest).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.LengthCm)
-                    .HasColumnType("decimal(18, 0)")
-                    .HasColumnName("LengthCM");
-
-                entity.Property(e => e.LengthM).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Length).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.MaximumCranialBreadth).HasColumnType("decimal(18, 0)");
 
@@ -285,10 +275,6 @@ namespace INTEXII_App.Models
                     .HasColumnName("MedialIPRamus");
 
                 entity.Property(e => e.NasionProsthion).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.NorthToFeet).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.NorthToHead).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.NuchalCrest).HasColumnType("decimal(18, 0)");
 
@@ -309,7 +295,7 @@ namespace INTEXII_App.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PoroticHyperotosisLocations)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PreaurSulcus).HasColumnType("decimal(18, 0)");
@@ -384,13 +370,13 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.Burials)
                     .HasForeignKey(d => d.AreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Burial__AreaID__690797E6");
+                    .HasConstraintName("FK__Burial__AreaID__01D345B0");
 
                 entity.HasOne(d => d.Square)
                     .WithMany(p => p.Burials)
                     .HasForeignKey(d => d.SquareId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Burial__SquareID__681373AD");
+                    .HasConstraintName("FK__Burial__SquareID__00DF2177");
             });
 
             modelBuilder.Entity<CarbonDating>(entity =>
@@ -452,7 +438,7 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.CarbonDatings)
                     .HasForeignKey(d => d.BurialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CarbonDat__Buria__74794A92");
+                    .HasConstraintName("FK__CarbonDat__Buria__0D44F85C");
             });
 
             modelBuilder.Entity<FieldBook>(entity =>
@@ -510,13 +496,13 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.FieldBookEntries)
                     .HasForeignKey(d => d.BurialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__FieldBook__Buria__6EC0713C");
+                    .HasConstraintName("FK__FieldBook__Buria__078C1F06");
 
                 entity.HasOne(d => d.FieldBook)
                     .WithMany(p => p.FieldBookEntries)
                     .HasForeignKey(d => d.FieldBookId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__FieldBook__Field__6DCC4D03");
+                    .HasConstraintName("FK__FieldBook__Field__0697FACD");
             });
 
             modelBuilder.Entity<Image>(entity =>
@@ -540,7 +526,7 @@ namespace INTEXII_App.Models
                     .WithMany(p => p.Images)
                     .HasForeignKey(d => d.BurialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Images__BurialID__7755B73D");
+                    .HasConstraintName("FK__Images__BurialID__10216507");
             });
 
             modelBuilder.Entity<Square>(entity =>

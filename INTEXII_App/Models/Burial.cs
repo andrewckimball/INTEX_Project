@@ -20,10 +20,15 @@ namespace INTEXII_App.Models
         public decimal SquareId { get; set; }
         public decimal AreaId { get; set; }
         public string BurialNumber { get; set; }
+        public decimal SouthToHead { get; set; }
+        public decimal SouthToFeet { get; set; }
+        public decimal WestToHead { get; set; }
+        public decimal WestToFeet { get; set; }
+        public decimal Length { get; set; }
+        public decimal Depth { get; set; }
+        public bool PhotoTaken { get; set; }
+        public bool BurialGoods { get; set; }
         public DateTime? DateFound { get; set; }
-        public decimal? BurialDepth { get; set; }
-        public decimal? LengthM { get; set; }
-        public decimal? LengthCm { get; set; }
         public string ClusterNumber { get; set; }
         public decimal? SampleNumber { get; set; }
         public string Rack { get; set; }
@@ -33,14 +38,6 @@ namespace INTEXII_App.Models
         public string SexBody { get; set; }
         public string SexGiles { get; set; }
         public decimal? GeFunctionTotal { get; set; }
-        public decimal? SouthToHead { get; set; }
-        public decimal? SouthToFeet { get; set; }
-        public decimal? EastToHead { get; set; }
-        public decimal? EastToFeet { get; set; }
-        public decimal? NorthToHead { get; set; }
-        public decimal? NorthToFeet { get; set; }
-        public decimal? WestToHead { get; set; }
-        public decimal? WestToFeet { get; set; }
         public string Description { get; set; }
         public string BasilarSuture { get; set; }
         public decimal? VentralArc { get; set; }
@@ -103,12 +100,12 @@ namespace INTEXII_App.Models
         public bool? PostcraniaAtMagazine { get; set; }
         public bool? ToBeConfirmed { get; set; }
         public bool? SkullTrauma { get; set; }
+        public bool? PostcraniaTrauma { get; set; }
         public bool? CribiaOrbitala { get; set; }
         public bool? PoroticHyperotosis { get; set; }
         public string PoroticHyperotosisLocations { get; set; }
         public bool? MetopicSuture { get; set; }
         public bool? ButtonOsteoma { get; set; }
-        public bool? PostcraniaTrauma { get; set; }
         public string OsteologyUnknownComment { get; set; }
         public bool? TmjOa { get; set; }
         public bool? LinearHypoplasiaEnamel { get; set; }
