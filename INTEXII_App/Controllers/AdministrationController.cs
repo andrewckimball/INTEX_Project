@@ -120,6 +120,7 @@ namespace INTEXII_App.Controllers
 
         }
 
+        //this kinda works to delete roles...
         public async Task<IActionResult> DeleteRole(string roleId)
         {
             //Deleting the movie that corresponds with the matching MovieID from the "MovieModel" model
@@ -129,6 +130,76 @@ namespace INTEXII_App.Controllers
             return RedirectToAction("ListRoles");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole(string roleId)
+        {
+            ViewBag.roleId = roleId;
 
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with ID = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            var model = new List<UserRole>();
+
+            foreach(var user in userManager.Users)
+            {
+                var userRole = new UserRole
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName
+                };
+
+                if(await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRole.IsSelected = true;
+                }
+                else
+                {
+                    userRole.IsSelected = false;
+                }
+                model.Add(userRole);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUsersInRole(List<UserRole> model, string roleId)
+        {
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with ID = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            for(int i = 0; i < model.Count; i++)
+            {
+                var user = await userManager.FindByNameAsync(model[i].UserId);
+
+                IdentityResult result = null;
+                
+                //Check to see if user is selected and if they are not already in the role
+                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                {
+                    result = await userManager.AddToRoleAsync(user, role.Name);
+                }
+                //else if user is not selected and already in the role, remove him/her
+                else if (!(model[i].IsSelected) && (await userManager.IsInRoleAsync(user, role.Name)))
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return View();
+        }
     }
 }
