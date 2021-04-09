@@ -177,7 +177,7 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
-            for(int i = 0; i < model.Count; i++)
+            for (int i = 0; i < model.Count; i++)
             {
                 var user = await userManager.FindByNameAsync(model[i].UserId);
 
@@ -197,9 +197,19 @@ namespace INTEXII_App.Controllers
                 {
                     continue;
                 }
+
+
+                if (result.Succeeded)
+                {
+                    //keep looping if 'i' is less that the amount of usrs
+                    if (i < (model.Count - 1))
+                        continue;
+                    else // else loop is done and redirect to the editrole view
+                        return RedirectToAction("EditRole", new { Id = roleId });
+                }
             }
 
-            return View();
+            return RedirectToAction("EditRole", new { Id = roleId });
         }
     }
 }
