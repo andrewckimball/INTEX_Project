@@ -2,7 +2,8 @@
 
 @if (Model.Any())
 {
-    <a href="/Identity/Account/Register"
+    @*href="/Identity/Account/Register"*@
+    <a asp-action="Register" asp-controller="Administration" 
        class="btn btn-primary mb-3" style="width:auto">
         Add new user
     </a>
