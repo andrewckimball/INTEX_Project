@@ -1,4 +1,5 @@
 ﻿using INTEXII_App.Areas.Identity.Data;
+using INTEXII_App.Areas.Identity.Pages.Account;
 using INTEXII_App.Models.AdminModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,15 @@ namespace INTEXII_App.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager; //might need to delete
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, 
+                                        UserManager<ApplicationUser> userManager,
+                                        SignInManager<ApplicationUser> signInManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.signInManager = signInManager; //might need to delete
         }
 
 
@@ -220,5 +225,51 @@ namespace INTEXII_App.Controllers
             var users = userManager.Users;
             return View(users);
         }
+
+
+
+
+        ////trying to stop the login when the admin adds a user.... not sure if it'll work though
+        //[HttpGet]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Register(RegisterModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser
+        //        {
+        //            FirstName = model.Input.FirstName,
+        //            LastName = model.Input.LastName,
+        //            Email = model.Input.Email
+        //        };
+
+        //        var result = await userManager.CreateAsync(user, model.Input.Password);
+
+        //        if (result.Succeeded)
+        //        {
+        //            if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        //            {
+        //                return RedirectToAction("ListUsers", "Administration");
+        //            }
+
+        //            await signInManager.SignInAsync(user, isPersistent: false);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+
+        //        foreach (var error in result.Errors)
+        //        {
+        //            ModelState.AddModelError(string.Empty, error.Description);
+        //        }
+        //    }
+
+        //    return View(model);
+
+        //}
+
     }
 }
