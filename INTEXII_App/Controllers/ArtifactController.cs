@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
+    //testing line 13 for authorization...
+    [Authorize]
     public class ArtifactController : Controller
     {
         private readonly BYU_ExcavationContext _context;
@@ -32,6 +35,7 @@ namespace INTEXII_App.Controllers
             {
                 return NotFound();
             }
+
 
             var artifact = await _context.Artifacts
                 .Include(a => a.Burial)
