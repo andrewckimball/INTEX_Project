@@ -1,4 +1,4 @@
-@model INTEXII_App.Models.Artifact
+@model INTEXII_App.Models.Area
 
 @{
     ViewData["Title"] = "Create";
@@ -6,20 +6,16 @@
 
 <h1>Create</h1>
 
-<h4>Artifact</h4>
+<h4>Area</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BurialId" class="control-label"></label>
-                <select asp-for="BurialId" class ="form-control" asp-items="ViewBag.BurialId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Area1" class="control-label"></label>
+                <input asp-for="Area1" class="form-control" />
+                <span asp-validation-for="Area1" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

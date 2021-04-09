@@ -14,9 +14,9 @@ namespace INTEXII_App.Controllers
     [Authorize]
     public class ArtifactController : Controller
     {
-        private readonly BYU_Excavation_2Context _context;
+        private readonly BYU_ExcavationContext _context;
 
-        public ArtifactController(BYU_Excavation_2Context context)
+        public ArtifactController(BYU_ExcavationContext context)
         {
             _context = context;
         }
@@ -24,21 +24,21 @@ namespace INTEXII_App.Controllers
         // GET: Artifact
         public async Task<IActionResult> Index()
         {
-            var bYU_Excavation_2Context = _context.Artifacts.Include(a => a.Area).Include(a => a.QuadrantCardinality);
-            return View(await bYU_Excavation_2Context.ToListAsync());
+            var bYU_ExcavationContext = _context.Artifacts.Include(a => a.Burial);
+            return View(await bYU_ExcavationContext.ToListAsync());
         }
 
         // GET: Artifact/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(decimal? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
+
             var artifact = await _context.Artifacts
-                .Include(a => a.Area)
-                .Include(a => a.QuadrantCardinality)
+                .Include(a => a.Burial)
                 .FirstOrDefaultAsync(m => m.ArtifactId == id);
             if (artifact == null)
             {
@@ -51,8 +51,7 @@ namespace INTEXII_App.Controllers
         // GET: Artifact/Create
         public IActionResult Create()
         {
-            ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "EorW");
-            ViewData["QuadrantCardinalityId"] = new SelectList(_context.QuadrantCardinalities, "QuadrantCardinalityId", "Cardinality");
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
             return View();
         }
 
@@ -61,7 +60,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtifactId,AreaId,QuadrantCardinalityId,DateFound,PreviouslySampled,BurialDepth,Rack,Bag,BurialNumber")] Artifact artifact)
+        public async Task<IActionResult> Create([Bind("ArtifactId,BurialId,Description")] Artifact artifact)
         {
             if (ModelState.IsValid)
             {
@@ -69,13 +68,12 @@ namespace INTEXII_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "EorW", artifact.AreaId);
-            ViewData["QuadrantCardinalityId"] = new SelectList(_context.QuadrantCardinalities, "QuadrantCardinalityId", "Cardinality", artifact.QuadrantCardinalityId);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
             return View(artifact);
         }
 
         // GET: Artifact/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
             {
@@ -87,8 +85,7 @@ namespace INTEXII_App.Controllers
             {
                 return NotFound();
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "EorW", artifact.AreaId);
-            ViewData["QuadrantCardinalityId"] = new SelectList(_context.QuadrantCardinalities, "QuadrantCardinalityId", "Cardinality", artifact.QuadrantCardinalityId);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
             return View(artifact);
         }
 
@@ -97,7 +94,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtifactId,AreaId,QuadrantCardinalityId,DateFound,PreviouslySampled,BurialDepth,Rack,Bag,BurialNumber")] Artifact artifact)
+        public async Task<IActionResult> Edit(decimal id, [Bind("ArtifactId,BurialId,Description")] Artifact artifact)
         {
             if (id != artifact.ArtifactId)
             {
@@ -124,13 +121,12 @@ namespace INTEXII_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "EorW", artifact.AreaId);
-            ViewData["QuadrantCardinalityId"] = new SelectList(_context.QuadrantCardinalities, "QuadrantCardinalityId", "Cardinality", artifact.QuadrantCardinalityId);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
             return View(artifact);
         }
 
         // GET: Artifact/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
             {
@@ -138,8 +134,7 @@ namespace INTEXII_App.Controllers
             }
 
             var artifact = await _context.Artifacts
-                .Include(a => a.Area)
-                .Include(a => a.QuadrantCardinality)
+                .Include(a => a.Burial)
                 .FirstOrDefaultAsync(m => m.ArtifactId == id);
             if (artifact == null)
             {
@@ -152,7 +147,7 @@ namespace INTEXII_App.Controllers
         // POST: Artifact/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
             var artifact = await _context.Artifacts.FindAsync(id);
             _context.Artifacts.Remove(artifact);
@@ -160,7 +155,7 @@ namespace INTEXII_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtifactExists(int id)
+        private bool ArtifactExists(decimal id)
         {
             return _context.Artifacts.Any(e => e.ArtifactId == id);
         }
