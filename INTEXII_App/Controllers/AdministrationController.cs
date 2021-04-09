@@ -21,6 +21,8 @@ namespace INTEXII_App.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+
+
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -210,6 +212,13 @@ namespace INTEXII_App.Controllers
             }
 
             return RedirectToAction("EditRole", new { Id = roleId });
+        }
+
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
         }
     }
 }
