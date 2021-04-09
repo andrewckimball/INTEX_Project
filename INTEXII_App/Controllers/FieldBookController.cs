@@ -9,23 +9,22 @@ using INTEXII_App.Models;
 
 namespace INTEXII_App.Controllers
 {
-    public class ArtifactController : Controller
+    public class FieldBookController : Controller
     {
         private readonly BYU_ExcavationContext _context;
 
-        public ArtifactController(BYU_ExcavationContext context)
+        public FieldBookController(BYU_ExcavationContext context)
         {
             _context = context;
         }
 
-        // GET: Artifact
+        // GET: FieldBook
         public async Task<IActionResult> Index()
         {
-            var bYU_ExcavationContext = _context.Artifacts.Include(a => a.Burial);
-            return View(await bYU_ExcavationContext.ToListAsync());
+            return View(await _context.FieldBooks.ToListAsync());
         }
 
-        // GET: Artifact/Details/5
+        // GET: FieldBook/Details/5
         public async Task<IActionResult> Details(decimal? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts
-                .Include(a => a.Burial)
-                .FirstOrDefaultAsync(m => m.ArtifactId == id);
-            if (artifact == null)
+            var fieldBook = await _context.FieldBooks
+                .FirstOrDefaultAsync(m => m.FieldBookId == id);
+            if (fieldBook == null)
             {
                 return NotFound();
             }
 
-            return View(artifact);
+            return View(fieldBook);
         }
 
-        // GET: Artifact/Create
+        // GET: FieldBook/Create
         public IActionResult Create()
         {
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
             return View();
         }
 
-        // POST: Artifact/Create
+        // POST: FieldBook/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtifactId,BurialId,Description")] Artifact artifact)
+        public async Task<IActionResult> Create([Bind("FieldBookId,Name,Description")] FieldBook fieldBook)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artifact);
+                _context.Add(fieldBook);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            return View(fieldBook);
         }
 
-        // GET: Artifact/Edit/5
+        // GET: FieldBook/Edit/5
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts.FindAsync(id);
-            if (artifact == null)
+            var fieldBook = await _context.FieldBooks.FindAsync(id);
+            if (fieldBook == null)
             {
                 return NotFound();
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            return View(fieldBook);
         }
 
-        // POST: Artifact/Edit/5
+        // POST: FieldBook/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("ArtifactId,BurialId,Description")] Artifact artifact)
+        public async Task<IActionResult> Edit(decimal id, [Bind("FieldBookId,Name,Description")] FieldBook fieldBook)
         {
-            if (id != artifact.ArtifactId)
+            if (id != fieldBook.FieldBookId)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(artifact);
+                    _context.Update(fieldBook);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtifactExists(artifact.ArtifactId))
+                    if (!FieldBookExists(fieldBook.FieldBookId))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace INTEXII_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            return View(fieldBook);
         }
 
-        // GET: Artifact/Delete/5
+        // GET: FieldBook/Delete/5
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts
-                .Include(a => a.Burial)
-                .FirstOrDefaultAsync(m => m.ArtifactId == id);
-            if (artifact == null)
+            var fieldBook = await _context.FieldBooks
+                .FirstOrDefaultAsync(m => m.FieldBookId == id);
+            if (fieldBook == null)
             {
                 return NotFound();
             }
 
-            return View(artifact);
+            return View(fieldBook);
         }
 
-        // POST: Artifact/Delete/5
+        // POST: FieldBook/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
-            var artifact = await _context.Artifacts.FindAsync(id);
-            _context.Artifacts.Remove(artifact);
+            var fieldBook = await _context.FieldBooks.FindAsync(id);
+            _context.FieldBooks.Remove(fieldBook);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtifactExists(decimal id)
+        private bool FieldBookExists(decimal id)
         {
-            return _context.Artifacts.Any(e => e.ArtifactId == id);
+            return _context.FieldBooks.Any(e => e.FieldBookId == id);
         }
     }
 }

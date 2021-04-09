@@ -9,23 +9,23 @@ using INTEXII_App.Models;
 
 namespace INTEXII_App.Controllers
 {
-    public class ArtifactController : Controller
+    public class BiologicalSampleController : Controller
     {
         private readonly BYU_ExcavationContext _context;
 
-        public ArtifactController(BYU_ExcavationContext context)
+        public BiologicalSampleController(BYU_ExcavationContext context)
         {
             _context = context;
         }
 
-        // GET: Artifact
+        // GET: BiologicalSample
         public async Task<IActionResult> Index()
         {
-            var bYU_ExcavationContext = _context.Artifacts.Include(a => a.Burial);
+            var bYU_ExcavationContext = _context.BiologicalSamples.Include(b => b.Burial);
             return View(await bYU_ExcavationContext.ToListAsync());
         }
 
-        // GET: Artifact/Details/5
+        // GET: BiologicalSample/Details/5
         public async Task<IActionResult> Details(decimal? id)
         {
             if (id == null)
@@ -33,42 +33,42 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts
-                .Include(a => a.Burial)
-                .FirstOrDefaultAsync(m => m.ArtifactId == id);
-            if (artifact == null)
+            var biologicalSample = await _context.BiologicalSamples
+                .Include(b => b.Burial)
+                .FirstOrDefaultAsync(m => m.BiologicalSampleId == id);
+            if (biologicalSample == null)
             {
                 return NotFound();
             }
 
-            return View(artifact);
+            return View(biologicalSample);
         }
 
-        // GET: Artifact/Create
+        // GET: BiologicalSample/Create
         public IActionResult Create()
         {
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
             return View();
         }
 
-        // POST: Artifact/Create
+        // POST: BiologicalSample/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtifactId,BurialId,Description")] Artifact artifact)
+        public async Task<IActionResult> Create([Bind("BiologicalSampleId,BurialId,Description,SampleRack,SampleBag,PreviouslySampled,Initials")] BiologicalSample biologicalSample)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artifact);
+                _context.Add(biologicalSample);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
+            return View(biologicalSample);
         }
 
-        // GET: Artifact/Edit/5
+        // GET: BiologicalSample/Edit/5
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -76,23 +76,23 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts.FindAsync(id);
-            if (artifact == null)
+            var biologicalSample = await _context.BiologicalSamples.FindAsync(id);
+            if (biologicalSample == null)
             {
                 return NotFound();
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
+            return View(biologicalSample);
         }
 
-        // POST: Artifact/Edit/5
+        // POST: BiologicalSample/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("ArtifactId,BurialId,Description")] Artifact artifact)
+        public async Task<IActionResult> Edit(decimal id, [Bind("BiologicalSampleId,BurialId,Description,SampleRack,SampleBag,PreviouslySampled,Initials")] BiologicalSample biologicalSample)
         {
-            if (id != artifact.ArtifactId)
+            if (id != biologicalSample.BiologicalSampleId)
             {
                 return NotFound();
             }
@@ -101,12 +101,12 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(artifact);
+                    _context.Update(biologicalSample);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtifactExists(artifact.ArtifactId))
+                    if (!BiologicalSampleExists(biologicalSample.BiologicalSampleId))
                     {
                         return NotFound();
                     }
@@ -117,11 +117,11 @@ namespace INTEXII_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", artifact.BurialId);
-            return View(artifact);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
+            return View(biologicalSample);
         }
 
-        // GET: Artifact/Delete/5
+        // GET: BiologicalSample/Delete/5
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -129,31 +129,31 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var artifact = await _context.Artifacts
-                .Include(a => a.Burial)
-                .FirstOrDefaultAsync(m => m.ArtifactId == id);
-            if (artifact == null)
+            var biologicalSample = await _context.BiologicalSamples
+                .Include(b => b.Burial)
+                .FirstOrDefaultAsync(m => m.BiologicalSampleId == id);
+            if (biologicalSample == null)
             {
                 return NotFound();
             }
 
-            return View(artifact);
+            return View(biologicalSample);
         }
 
-        // POST: Artifact/Delete/5
+        // POST: BiologicalSample/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
-            var artifact = await _context.Artifacts.FindAsync(id);
-            _context.Artifacts.Remove(artifact);
+            var biologicalSample = await _context.BiologicalSamples.FindAsync(id);
+            _context.BiologicalSamples.Remove(biologicalSample);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtifactExists(decimal id)
+        private bool BiologicalSampleExists(decimal id)
         {
-            return _context.Artifacts.Any(e => e.ArtifactId == id);
+            return _context.BiologicalSamples.Any(e => e.BiologicalSampleId == id);
         }
     }
 }

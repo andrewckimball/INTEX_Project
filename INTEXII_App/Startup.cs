@@ -37,7 +37,7 @@ namespace INTEXII_App
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            services.AddDbContext<BYU_Excavation_2Context>(options =>
+            services.AddDbContext<BYU_ExcavationContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:ExcavationConnectionString"]);
             });

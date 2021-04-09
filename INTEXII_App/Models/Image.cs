@@ -7,10 +7,10 @@ namespace INTEXII_App.Models
 {
     public partial class Image
     {
-        public int ImageId { get; set; }
-        public int ArtifactId { get; set; }
-        public string ImagePointer { get; set; }
+        public decimal ImageId { get; set; }
+        public decimal BurialId { get; set; }
+        public string ImagePodecimaler { get; set; }
 
-        public virtual Artifact Artifact { get; set; }
+        public virtual Burial Burial { get; set; }
     }
 }
