@@ -13,28 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DateFound)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PreviouslySampled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialDepth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rack)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuadrantCardinality)
+                @Html.DisplayNameFor(model => model.Burial)
             </th>
             <th></th>
         </tr>
@@ -43,28 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DateFound)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PreviouslySampled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDepth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.EorW)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuadrantCardinality.Cardinality)
+                @Html.DisplayFor(modelItem => item.Burial.BurialId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ArtifactId">Edit</a> |
