@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<!--Allows to check global users-->
+@inject SignInManager<ApplicationUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,8 +9,6 @@
     <title>@ViewData["Title"] - INTEX II</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    @*<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">*@
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 
 </head>
@@ -25,9 +26,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Administration" 
+                                   asp-action="ListRoles">Manage Roles</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -42,7 +47,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - INTEX II 
+            &copy; 2021 - INTEX II
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

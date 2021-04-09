@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace INTEXII_App.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")] 
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -179,7 +179,7 @@ namespace INTEXII_App.Controllers
 
             for (int i = 0; i < model.Count; i++)
             {
-                var user = await userManager.FindByNameAsync(model[i].UserId);
+                var user = await userManager.FindByIdAsync(model[i].UserId);
 
                 IdentityResult result = null;
                 
@@ -189,7 +189,7 @@ namespace INTEXII_App.Controllers
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }
                 //else if user is not selected and already in the role, remove him/her
-                else if (!(model[i].IsSelected) && (await userManager.IsInRoleAsync(user, role.Name)))
+                else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
                 {
                     result = await userManager.RemoveFromRoleAsync(user, role.Name);
                 }
