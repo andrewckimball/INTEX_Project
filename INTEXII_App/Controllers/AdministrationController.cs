@@ -127,14 +127,33 @@ namespace INTEXII_App.Controllers
 
         }
 
-        //this kinda works to delete roles...
-        public async Task<IActionResult> DeleteRole(string roleId)
+        //Delete role
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
         {
-            //Deleting the movie that corresponds with the matching MovieID from the "MovieModel" model
-            var role = await roleManager.FindByIdAsync(roleId);
-            var result = await roleManager.DeleteAsync(role);
+            var role = await roleManager.FindByIdAsync(id);
 
-            return RedirectToAction("ListRoles");
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await roleManager.DeleteAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListRoles");
+            }
         }
 
         [HttpGet]
@@ -227,49 +246,93 @@ namespace INTEXII_App.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
 
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
 
-        ////trying to stop the login when the admin adds a user.... not sure if it'll work though
-        //[HttpGet]
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
+            // GetClaimsAsync retunrs the list of user Claims
+            var userClaims = await userManager.GetClaimsAsync(user);
+            // GetRolesAsync returns the list of user Roles
+            var userRoles = await userManager.GetRolesAsync(user);
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register(RegisterModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = new ApplicationUser
-        //        {
-        //            FirstName = model.Input.FirstName,
-        //            LastName = model.Input.LastName,
-        //            Email = model.Input.Email
-        //        };
+            var model = new EditUser
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Roles = userRoles
+            };
 
-        //        var result = await userManager.CreateAsync(user, model.Input.Password);
+            return View(model);
+        }
 
-        //        if (result.Succeeded)
-        //        {
-        //            if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-        //            {
-        //                return RedirectToAction("ListUsers", "Administration");
-        //            }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUser model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
 
-        //            await signInManager.SignInAsync(user, isPersistent: false);
-        //            return RedirectToAction("Index", "Home");
-        //        }
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
 
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError(string.Empty, error.Description);
-        //        }
-        //    }
+                var result = await userManager.UpdateAsync(user);
 
-        //    return View(model);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
 
-        //}
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
 
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
     }
 }
