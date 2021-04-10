@@ -109,6 +109,11 @@ namespace INTEXII_App.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        //adding this code 
+                        if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("ListUsers", "Administration");
+                        }
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }

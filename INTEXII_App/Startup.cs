@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using INTEXII_App.Models;
 using INTEXII_App.Areas.Identity.Data;
+using INTEXII_App.Models.AdminModel;
 
 namespace INTEXII_App
 {
@@ -42,6 +43,7 @@ namespace INTEXII_App
             //trying to figure out login rn
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
