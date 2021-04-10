@@ -1,7 +1,7 @@
 ﻿@model EditUser
 
 
-<h1>Edit User</h1>
+<h1>Edit Users</h1>
 
 <form method="post" class="mt-3">
     <div class="form-group row">
@@ -47,7 +47,7 @@
             <button type="submit" class="btn btn-primary">Update</button>
             <a asp-action="ListUsers" class="btn btn-primary">Cancel</a>
         </div>
-    </div>
+    </div><br />
 
     <div class="card">
         <div class="card-header">
@@ -67,7 +67,7 @@
             }
         </div>
         <div class="card-footer">
-            <a href="#" style="width:auto" class="btn btn-primary">
+            <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" style="width:auto" class="btn btn-primary">
                 Manage Roles
             </a>
         </div>
