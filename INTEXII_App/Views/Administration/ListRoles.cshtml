@@ -16,13 +16,11 @@
                 <h5 class="card-title">@role.Name</h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration"
-                   asp-route-id="@role.Id">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
-                <!--<form asp-action="DeleteRole" method="post">
-                    <input type="hidden" name="roleId" value="@role.Id" />-->  <!--name "movieid" is being passed to controller-->
-                    <!--<button type="submit" class="btn btn-danger">Delete</button>
-                </form>-->
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                    <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration"
+                       asp-route-id="@role.Id">Edit</a>
+                    <button type="submit" href="#" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     }
