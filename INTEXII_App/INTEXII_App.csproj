@@ -31,4 +31,7 @@
   <ItemGroup>
     <Content Remove="Views\Administration\ListUsers.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\ViewModels\" />
+  </ItemGroup>
 </Project>
