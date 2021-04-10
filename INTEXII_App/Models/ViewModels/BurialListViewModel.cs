@@ -12,5 +12,6 @@ namespace INTEXII_App.Models.ViewModels
         public List<Area> Areas { get; set; }
         public List<Square> Squares { get; set; }
         public List<Burial> Burials { get; set; }
+        public int RowCounter { get; set; } = 1;
     }
 }

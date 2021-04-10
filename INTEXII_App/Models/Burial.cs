@@ -55,7 +55,7 @@ namespace INTEXII_App.Models
         public decimal? BoneLength { get; set; }
         public decimal? MedialClavicle { get; set; }
         public decimal? IliacCrest { get; set; }
-        public decimal? FemurDiameter { get; set; }
+        public decimal? FemurDiameter { get; set;}
         public decimal? Humerus { get; set; }
         public decimal? FemurLength { get; set; }
         public decimal? HumerusLength { get; set; }

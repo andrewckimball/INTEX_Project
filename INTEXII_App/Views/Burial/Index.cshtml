@@ -4,47 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
+<link href="~/css/Burial/Index.css" rel="stylesheet" />
+<div class="container" >
+    <div class="panel" >
+        <div class="panel-body" style="height:700px; overflow:scroll;">
+            <table class="table table-bordered bordered table-striped table-condensed datatable" >
+                <thead>
+                    <tr>
+                        <th class="row-count-column"></th>
+                        <th>Burial ID</th>
+                        <th>Area</th>
+                        <th>Burial Number</th>
+                        <th>Depth</th>
+                        <th>Photo Taken</th>
+                        <th>Burial Goods</th>
+                        <th>Notes</th>
+                        <th><a asp-action="Create">Add Record</a></th>
+                    </tr>
+                </thead>
+                <tbody class="burial-table-body">
+                    @foreach (var item in Model.Burials)
+                    {
+                    <tr>
+                        <td class="row-count-column">@Model.RowCounter</td>
+                        <td class="burial-table-columns">
+                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairNs/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairNs
+                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationNs
 
-<div style="height:700px; overflow:scroll;">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Burial ID</th>
-                <th>Area</th>
-                <th><a asp-action="Create">Add Record</a></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Burials)
-            {
-                <tr>
-                    <td>
-                        @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairNs/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairNs
-                        @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationNs
+                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairEw/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairEw
+                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationEw
+                        </td>
+                        <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
+                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().BurialNumber</td>
+                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Depth</td>
+                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().PhotoTaken</td>
+                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().BurialGoods</td>
 
-                        @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairEw/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairEw
-                        @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationEw
-                    </td>
-                    <td>@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
-                    <td>
+                        @if (!String.IsNullOrEmpty(@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description))
+                        {
+                            if (@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description.Length >= 30)
+                            {
+                                <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description.Substring(0, 30) ...</td>
+                            }
+                            else
+                            {
+                                <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description ...</td>                    }
+                            }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                    <td class="burial-table-columns">
                         <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
                     </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </tr>
+                        Model.RowCounter++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
-<style>
-    .table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #dee2e6;
-        position: sticky;
-        top: -2px;
-        background-color: white;
-    }
-</style>
 
 
