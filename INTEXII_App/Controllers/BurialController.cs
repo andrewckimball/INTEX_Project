@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using INTEXII_App.Models.ViewModels;
 
 namespace INTEXII_App.Controllers
 {
@@ -21,8 +22,17 @@ namespace INTEXII_App.Controllers
         // GET: Burial
         public async Task<IActionResult> Index()
         {
-            var bYU_ExcavationContext = _context.Burials.Take(10).Include(b => b.Area).Include(b => b.Square);  /////////////////////// .Take(10) only returns the first 10 rows/////////////////////
-            return View(await bYU_ExcavationContext.ToListAsync());
+
+            //var bYU_ExcavationContext = _context.Burials.Take(10).Include(b => b.Area).Include(b => b.Square);  /////////////////////// .Take(10) only returns the first 10 rows/////////////////////
+            //return View(await bYU_ExcavationContext.ToListAsync());
+
+
+            return View(new BurialListViewModel
+            {
+                Areas = await _context.Areas.ToListAsync(),
+                Squares = await _context.Squares.ToListAsync(),
+                Burials = await _context.Burials.ToListAsync()
+            });
         }
 
         // GET: Burial/Details/5
