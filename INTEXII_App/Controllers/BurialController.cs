@@ -19,19 +19,24 @@ namespace INTEXII_App.Controllers
             _context = context;
         }
 
+        private int PageSize = 50;
+
         // GET: Burial
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string category, int page = 1)
         {
-
-            //var bYU_ExcavationContext = _context.Burials.Take(10).Include(b => b.Area).Include(b => b.Square);  /////////////////////// .Take(10) only returns the first 10 rows/////////////////////
-            //return View(await bYU_ExcavationContext.ToListAsync());
-
 
             return View(new BurialListViewModel
             {
-                Areas = await _context.Areas.Take(200).ToListAsync(),
-                Squares = await _context.Squares.Take(200).ToListAsync(),
-                Burials = await _context.Burials.Take(200).ToListAsync()
+                Areas = await _context.Areas.ToListAsync(),
+                Squares = await _context.Squares.ToListAsync(),
+                Burials = await _context.Burials.Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalNumItems = _context.Burials.Count() 
+                    //TotalNumItems = category == null ? _context.Burials.Count() : _context.Burials.Where(x => x.Type == category).Count()/
+                }
             });
         }
 
