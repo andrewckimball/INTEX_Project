@@ -35,6 +35,7 @@
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\css\Burial\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 </Project>
 
