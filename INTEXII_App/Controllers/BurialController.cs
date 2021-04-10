@@ -29,9 +29,9 @@ namespace INTEXII_App.Controllers
 
             return View(new BurialListViewModel
             {
-                Areas = await _context.Areas.ToListAsync(),
-                Squares = await _context.Squares.ToListAsync(),
-                Burials = await _context.Burials.ToListAsync()
+                Areas = await _context.Areas.Take(200).ToListAsync(),
+                Squares = await _context.Squares.Take(200).ToListAsync(),
+                Burials = await _context.Burials.Take(200).ToListAsync()
             });
         }
 

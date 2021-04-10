@@ -1,0 +1,26 @@
+﻿
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky;
+    top: -2px;
+    color: white;
+    background-color: #2a2a2a;
+}
+
+.burial-table-columns {
+    padding: 5px;
+    padding-left: 12px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.row-count-column {
+    width: 50px;
+    text-align: center;
+}
+
+.burial-table-body {
+    font-size: 12px;
+}
+
