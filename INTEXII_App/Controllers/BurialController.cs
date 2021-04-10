@@ -52,7 +52,12 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            return View(burial);
+            return View(new DetailListViewModel
+            {
+                DetailBurial = burial,
+                Burials = _context.Burials
+
+            });
         }
 
         // GET: Burial/Create

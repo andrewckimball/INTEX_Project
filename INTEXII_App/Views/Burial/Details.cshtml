@@ -1,630 +1,757 @@
-@model INTEXII_App.Models.Burial
+@model INTEXII_App.Models.ViewModels.DetailListViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
+<divHeader>
 
-<h1>Details</h1>
+    <link href="~/DetailPage/TabsStyles.css" rel="stylesheet" />
 
-<div>
-    <h4>Burial</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SouthToHead)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SouthToHead)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SouthToFeet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SouthToFeet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WestToHead)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WestToHead)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WestToFeet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WestToFeet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Length)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Length)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Depth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Depth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhotoTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhotoTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialGoods)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialGoods)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateFound)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateFound)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClusterNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClusterNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SampleNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SampleNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rack)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rack)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Shelf)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Shelf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Bag)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Bag)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PreviouslySampled)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PreviouslySampled)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SexBody)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SexBody)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SexGiles)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SexGiles)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GeFunctionTotal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GeFunctionTotal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasilarSuture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasilarSuture)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VentralArc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VentralArc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubPubicAngle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubPubicAngle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SciaticNotch)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SciaticNotch)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PubicBone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PubicBone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PreaurSulcus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PreaurSulcus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedialIpramus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedialIpramus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DorsalPitting)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DorsalPitting)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ForemanMagnum)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ForemanMagnum)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FemurHead)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FemurHead)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HumerusHead)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HumerusHead)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Osteophytosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Osteophytosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PubicSymphysis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PubicSymphysis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BoneLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BoneLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedialClavicle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedialClavicle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IliacCrest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IliacCrest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FemurDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FemurDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Humerus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Humerus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FemurLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FemurLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HumerusLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HumerusLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TibiaLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TibiaLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Robust)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Robust)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SupraorbitalRidges)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SupraorbitalRidges)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrbitEdge)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrbitEdge)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParietalBossing)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParietalBossing)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gonian)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gonian)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NuchalCrest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NuchalCrest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ZygomaticCrest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ZygomaticCrest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CranialSuture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CranialSuture)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaximumCranialLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaximumCranialLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaximumCranialBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaximumCranialBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionBregmaHeight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionBregmaHeight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionNasion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionNasion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionProsthionLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionProsthionLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BizygomaticDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BizygomaticDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NasionProsthion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NasionProsthion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaximumNasalBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaximumNasalBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DecimalerorbitalBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DecimalerorbitalBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HairColor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HairColor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PreservationIndex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PreservationIndex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HairTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HairTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoftTissueTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoftTissueTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BoneTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BoneTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToothTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToothTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextileTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextileTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescriptionOfTaken)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescriptionOfTaken)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ArtifactFound)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ArtifactFound)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstimatedAge)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstimatedAge)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AgeMethod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AgeMethod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstimateLivingStature)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstimateLivingStature)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToothAttrition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToothAttrition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToothEruption)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToothEruption)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PathologyAnomalies)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PathologyAnomalies)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EpiphysealUnion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EpiphysealUnion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HeadDirection)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HeadDirection)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Byusample)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Byusample)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BodyAnalysisYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BodyAnalysisYear)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SkullAtMagazine)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SkullAtMagazine)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostcraniaAtMagazine)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostcraniaAtMagazine)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToBeConfirmed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToBeConfirmed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SkullTrauma)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SkullTrauma)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostcraniaTrauma)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostcraniaTrauma)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CribiaOrbitala)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CribiaOrbitala)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PoroticHyperotosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PoroticHyperotosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PoroticHyperotosisLocations)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PoroticHyperotosisLocations)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetopicSuture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetopicSuture)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ButtonOsteoma)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ButtonOsteoma)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OsteologyUnknownComment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OsteologyUnknownComment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TmjOa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TmjOa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinearHypoplasiaEnamel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LinearHypoplasiaEnamel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreaHillBurials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreaHillBurials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tomb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tomb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialPreservation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialPreservation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialWrapping)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialWrapping)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialAdultChild)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialAdultChild)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GenderCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GenderCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialGenderMethod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialGenderMethod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AgeCodeSingle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AgeCodeSingle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FaceBundle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FaceBundle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOnSkull)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOnSkull)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Area.Area1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Square)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Square.BurialLocationEw)
-        </dd>
-    </dl>
+</divHeader>
+
+<br />
+<h1>Burial Details</h1>
+<br />
+<br />
+
+
+
+<div class="tabset">
+    <!-- Tab 1 -->
+    <input type="radio" name="tabset" id="tab1" aria-controls="General" checked>
+    <label for="tab1">General</label>
+    <!-- Tab 2 -->
+    <input type="radio" name="tabset" id="tab2" aria-controls="BodyBone">
+    <label for="tab2">Body Bone Info</label>
+    <!-- Tab 3 -->
+    <input type="radio" name="tabset" id="tab3" aria-controls="Cranial">
+    <label for="tab3">Cranial</label>
+    <!-- Tab 4 -->
+    <input type="radio" name="tabset" id="tab4" aria-controls="misc">
+    <label for="tab4">Misc</label>
+
+    <div class="tab-panels">
+        <section id="General" class="tab-panel">
+            <h2>General</h2>
+            <br />
+            <h5><span>Description</span></h5>
+            <p>@Html.DisplayFor(model => model.DetailBurial.Description)</p>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialNumber)
+                </dt>
+
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialNumber)
+                </dd>
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SouthToHead)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SouthToHead)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SouthToFeet)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SouthToFeet)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.WestToHead)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.WestToHead)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.WestToFeet)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.WestToFeet)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Length)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Length)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Depth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Depth)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PhotoTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PhotoTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialGoods)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialGoods)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.DateFound)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.DateFound)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ClusterNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ClusterNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SampleNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SampleNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Rack)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Rack)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Shelf)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Shelf)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Bag)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Bag)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PreviouslySampled)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PreviouslySampled)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Area)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Area.Area1)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Square)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Square.BurialLocationEw)
+                </dd>
+
+            </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+        <section id="BodyBone" class="tab-panel">
+            <h2>Body Bone Info</h2>
+            @{ double Male = Model.Burials.Where(x => x.SexBody == "Male").Count();
+                double Female = Model.Burials.Where(x => x.SexBody == "Female").Count();
+                double Other = Model.Burials.Count();
+                Female = (Female / Model.Burials.Count()) * 100;
+                Male = (Male / Model.Burials.Count()) * 100;
+                string SexURL = $"https://image-charts.com/chart?chco=6CCC86%7CFD7780%7CF7D36F&chd=t%3A{Male}%2C{Female}%2C{Other}&chdl=Male%7CFemale%7COther&chli=Giles%20Gender&chs=300x300&cht=pd&chtt=Expenses";
+                <img src="@SexURL" />
+            }
+
+            @{ decimal? BBHmin = Model.Burials.Min(x => x.BasionBregmaHeight);
+                decimal? BBHmax = Model.Burials.Max(x => x.BasionBregmaHeight);
+                decimal? BBHavg = @Model.Burials.Average(x => x.BasionBregmaHeight);
+                decimal? BBHcount = @Model.Burials.Where(x => x.BasionBregmaHeight != 0).Count();
+                decimal? BBHthis = @Model.DetailBurial.BasionBregmaHeight;
+
+                string BBHurl = $"https://image-charts.com/chart?chbh=20&chbr=20&chco=605E85%7C994D80&chd=a%3A{BBHthis}%2C{BBHavg}&chdlp=r&chl={BBHthis}%7C{BBHavg}%7C60%7C80%7C40%7C50%7C60%7C100%7C40%7C20&chs=300x300&cht=bvs&chtt=Maximum%20Cranial%20Breadth&chxl=0%3A%7CThis%7CAverage&chxt=x%2Cy";
+
+                <img src="@BBHurl" />
+            }
+
+            @{ decimal? PBmin = Model.Burials.Min(x => x.ParietalBossing);
+                decimal? PBmax = Model.Burials.Max(x => x.ParietalBossing);
+                decimal? PBavg = @Model.Burials.Average(x => x.ParietalBossing);
+                decimal? PBcount = @Model.Burials.Where(x => x.ParietalBossing != 0).Count();
+                decimal? PBthis = @Model.DetailBurial.ParietalBossing;
+
+                string PBurl = $"https://image-charts.com/chart?chbh=20&chbr=20&chco=605E85%7C994D80&chd=a%3A{PBthis}%2C{PBavg}&chdlp=r&chl={PBthis}%7C{PBavg}%7C60%7C80%7C40%7C50%7C60%7C100%7C40%7C20&chs=300x300&cht=bvs&chtt=Parietal%20Bossing&chxl=0%3A%7CThis%7CAverage&chxt=x%2Cy";
+
+                <img src="@PBurl" />
+            }
+
+
+
+            <!--<h1>@Model.Burials.Where(x => x.ParietalBossing != 0).Count()</h1>
+    <h1>@Model.Burials.Average(x => x.ParietalBossing)</h1>
+    <h1>@Model.Burials.Max(x => x.ParietalBossing)</h1>
+    <h1>@Model.Burials.Min(x => x.ParietalBossing)</h1>
+    <br /> -->
+
+            <br /><br />
+
+                  <table class="table table-hover table-striped">
+                      <th>Details</th>
+                      <th></th>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.SexBody)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.SexBody)</td>
+
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.SexGiles)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.SexGiles)</td>
+
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.GeFunctionTotal)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.GeFunctionTotal)</td>
+                      </tr>
+                      
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.BasilarSuture)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.BasilarSuture)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.VentralArc)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.VentralArc)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.SubPubicAngle)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.SubPubicAngle)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.SciaticNotch)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.SciaticNotch)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.PubicBone)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.PubicBone)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.PreaurSulcus)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.PreaurSulcus)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.MedialIpramus)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.MedialIpramus)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.DorsalPitting)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.DorsalPitting)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.ForemanMagnum)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.ForemanMagnum)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.FemurHead)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.FemurHead)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.HumerusHead)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.HumerusHead)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.Osteophytosis)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.Osteophytosis)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.PubicSymphysis)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.PubicSymphysis)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.BoneLength)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.BoneLength)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.MedialClavicle)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.MedialClavicle)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.IliacCrest)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.IliacCrest)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.FemurDiameter)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.FemurDiameter)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.Humerus)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.Humerus)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.FemurLength)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.FemurLength)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.HumerusLength)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.HumerusLength)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.TibiaLength)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.TibiaLength)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.Robust)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.Robust)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.SupraorbitalRidges)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.SupraorbitalRidges)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.OrbitEdge)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.OrbitEdge)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.ParietalBossing)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.ParietalBossing)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.Gonian)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.Gonian)</td>
+                      </tr>
+                      <tr>
+                          <td>@Html.DisplayNameFor(model => model.DetailBurial.NuchalCrest)</td>
+                          <td>@Html.DisplayFor(model => model.DetailBurial.NuchalCrest)</td>
+                      </tr>
+                      <tr>
+                          <td>hi</td>
+                          <td>how</td>
+                      </tr>
+                      <tr>
+                          <td>hi</td>
+                          <td>how</td>
+                      </tr>
+                      <tr>
+                          <td>hi</td>
+                          <td>how</td>
+                      </tr>
+                      <tr>
+                          <td>hi</td>
+                          <td>how</td>
+                      </tr>
+                      <tr>
+                          <td>hi</td>
+                          <td>how</td>
+                      </tr>
+                  </table>
+
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ZygomaticCrest)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ZygomaticCrest)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.CranialSuture)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.CranialSuture)
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BasionBregmaHeight)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BasionBregmaHeight)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BasionNasion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BasionNasion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BasionProsthionLength)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BasionProsthionLength)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BizygomaticDiameter)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BizygomaticDiameter)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.NasionProsthion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.NasionProsthion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.MaximumNasalBreadth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.MaximumNasalBreadth)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.DecimalerorbitalBreadth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.DecimalerorbitalBreadth)
+                </dd>
+            </dl>
+
+
+
+        </section>
+        <section id="Cranial" class="tab-panel">
+            <h2>Cranial Info</h2>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ToothAttrition)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ToothAttrition)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ToothEruption)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ToothEruption)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PathologyAnomalies)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PathologyAnomalies)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.EpiphysealUnion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.EpiphysealUnion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SkullAtMagazine)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SkullAtMagazine)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PostcraniaAtMagazine)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PostcraniaAtMagazine)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ToBeConfirmed)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ToBeConfirmed)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SkullTrauma)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SkullTrauma)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PostcraniaTrauma)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PostcraniaTrauma)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.CribiaOrbitala)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.CribiaOrbitala)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PoroticHyperotosis)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PoroticHyperotosis)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PoroticHyperotosisLocations)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PoroticHyperotosisLocations)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.MetopicSuture)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.MetopicSuture)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ButtonOsteoma)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ButtonOsteoma)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.OsteologyUnknownComment)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.OsteologyUnknownComment)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.TmjOa)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.TmjOa)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.LinearHypoplasiaEnamel)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.LinearHypoplasiaEnamel)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.MaximumCranialLength)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.MaximumCranialLength)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.MaximumCranialBreadth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.MaximumCranialBreadth)
+                </dd>
+            </dl>
+        </section>
+        <section id="misc" class="tab-panel">
+            <h2>Miscellaneous Info</h2>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.HairColor)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.HairColor)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.PreservationIndex)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.PreservationIndex)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.HairTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.HairTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.SoftTissueTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.SoftTissueTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BoneTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BoneTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ToothTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ToothTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.TextileTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.TextileTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.DescriptionOfTaken)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.DescriptionOfTaken)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.ArtifactFound)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.ArtifactFound)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.EstimatedAge)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.EstimatedAge)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.AgeMethod)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.AgeMethod)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.EstimateLivingStature)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.EstimateLivingStature)
+                </dd>
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.HeadDirection)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.HeadDirection)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Byusample)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Byusample)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BodyAnalysisYear)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BodyAnalysisYear)
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.AreaHillBurials)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.AreaHillBurials)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.Tomb)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.Tomb)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialPreservation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialPreservation)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialWrapping)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialWrapping)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialAdultChild)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialAdultChild)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.GenderCode)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.GenderCode)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.BurialGenderMethod)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.BurialGenderMethod)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.AgeCodeSingle)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.AgeCodeSingle)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.FaceBundle)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.FaceBundle)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DetailBurial.DateOnSkull)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DetailBurial.DateOnSkull)
+                </dd>
+
+            </dl>
+        </section>
+    </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

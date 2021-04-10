@@ -33,7 +33,6 @@
     <Content Remove="Views\Administration\ListUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\css\Burial\" />
   </ItemGroup>
 </Project>
