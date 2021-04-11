@@ -1,13 +1,18 @@
 ﻿@model List<ManageUserRoles>
 
-@{ 
+@{
     var userId = ViewBag.userId;
 }
 
+<br />
+<div class="text-center">
+    <h2>Add/Remove Website Roles</h2>
+</div>
+<br />
 <form method="post">
     <div class="card">
         <div class="card-header">
-            <h2>Manage User Roles</h2>
+            Use the checkboxes below to manage the selected user's role
         </div>
         <div class="card-body">
             @for (int i = 0; i < Model.Count; i++)
