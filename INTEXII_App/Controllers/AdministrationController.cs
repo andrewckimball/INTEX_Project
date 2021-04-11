@@ -288,6 +288,7 @@ namespace INTEXII_App.Controllers
             else
             {
                 user.Email = model.Email;
+                user.UserName = model.UserName;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
 
