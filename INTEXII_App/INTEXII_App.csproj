@@ -31,8 +31,8 @@
     <PackageReference Include="Rsk.AspNetCore.Fido.EntityFramework" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\css\Burial\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 </Project>
 
