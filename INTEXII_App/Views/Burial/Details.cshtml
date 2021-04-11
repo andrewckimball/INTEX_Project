@@ -31,6 +31,9 @@
     <!-- Tab 4 -->
     <input type="radio" name="tabset" id="tab4" aria-controls="misc">
     <label for="tab4">Misc</label>
+    <!-- Tab 5 -->
+    <input type="radio" name="tabset" id="tab5" aria-controls="notes">
+    <label for="tab5">Notes</label>
 
     <div class="tab-panels">
         <section id="General" class="tab-panel">
@@ -39,14 +42,14 @@
 
             @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
             {
-        
-             <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a>
-             <br />
-             <br />
-            }
-            
 
-            
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a>
+                <br />
+                <br />
+            }
+
+
+
             <h5><span>Description</span></h5>
             <p>@Html.DisplayFor(model => model.DetailBurial.Description)</p>
             <br />
@@ -682,12 +685,17 @@
 
 
         </section>
+        <section id="notes" class="tab-panel">
+            <h2>Notes</h2>
+            <textarea rows="10" class="form-control" readonly="">@Html.DisplayFor(model => model.DetailBurial.Description)</textarea>
+        </section>
+    
     </div>
 
 </div>
 
 
 <a class="btn btn-primary"
-   style="position: fixed; right: 2rem; bottom: 2rem;"
+   style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
    asp-controller="Burial"
    asp-action="Index">Back to List</a>
