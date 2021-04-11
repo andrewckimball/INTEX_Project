@@ -1,23 +1,28 @@
-﻿@model  CreateRole
+﻿@model CreateRole
 
 
 
-<div class="col-md-10 offset-md-1">
-    <section>
-        <div class="login-form-icon">
-            <i class="fas fa-user-circle fa-9x text-secondary"></i>
-        </div>
-        <form id="account" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RoleName"></label>
-                <input asp-for="RoleName" class="form-control" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block ">Create Role</button>
-            </div>
-        </form>
-    </section>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <section>
+            <div class="text-center"><br /><br />
+                <h2>Enter New Role</h2>
+            </div><br />
+            @*<div class="login-form-icon">
+                <i class="fas fa-user-circle fa-9x text-secondary"></i>
+            </div>*@
+            <form id="account" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoleName"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block ">Create Role</button>
+                </div>
+            </form>
+        </section>
+    </div>
 </div>

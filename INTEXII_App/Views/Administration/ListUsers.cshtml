@@ -9,25 +9,23 @@
         <a href="/Identity/Account/Register" class="btn btn-primary mb-3" style="width:auto">
             Add new user
         </a><br /><br />
-        <table class="table table-striped table-hover">
+        <table class="table">
 
             <tr>
-                <th>User ID</th>
                 <th>User Name</th>
+                <th>Email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email</th>
                 <th>Edit/Delete</th>
             </tr>
 
             @foreach (var user in Model)
             {
                 <tr>
-                    <td width="180">@user.Id</td>
                     <td >@user.UserName</td>
+                    <td >@user.Email</td>
                     <td >@user.FirstName</td>
                     <td >@user.LastName</td>
-                    <td >@user.Email</td>
                     <td >
                         <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
                             <a class="btn btn-primary" asp-action="EditUser" asp-controller="Administration"

@@ -23,6 +23,7 @@ namespace INTEXII_App.Areas.Identity
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //true if want email confirmation
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
+
             });
         }
     }
