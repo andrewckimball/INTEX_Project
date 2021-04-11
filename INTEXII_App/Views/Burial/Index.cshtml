@@ -5,6 +5,78 @@
 }
 
 <link href="~/css/Burial/Index.css" rel="stylesheet" />
+
+<div>
+    <form asp-controller="Burial" asp-action="Filter" method="post">
+
+        <div class="form-group">
+
+            <label>Square:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Square))")>
+                <option value="all">All</option>
+            </select>
+
+            <label>Area:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Area))">
+                <option value="all">All</option>
+            </select>
+            
+
+            <label>Length:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Length))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Depth:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Depth))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Photo Taken:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.PhotoTaken))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Burial Goods:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BurialGoods))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Sex:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Sex))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Hair Color:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HairColor))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Face Bundle:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.FaceBundle))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Head Direction:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HeadDirection))">
+                <option value="all">All</option>
+            </select>
+
+            <label>Estimated Age:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.EstimatedAge))">
+                <option value="all">All</option>
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+
+        <a asp-controller="Burial" asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+
+    </form>
+</div>
+
+
 <div class="container" >
     <div class="panel" >
         <div class="panel-body" style="height:700px; overflow:scroll;">
