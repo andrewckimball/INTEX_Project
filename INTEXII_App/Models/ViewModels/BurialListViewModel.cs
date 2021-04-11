@@ -9,9 +9,9 @@ namespace INTEXII_App.Models.ViewModels
         {
         }
 
-        public List<Area> Areas { get; set; }
-        public List<Square> Squares { get; set; }
-        public List<Burial> Burials { get; set; }
+        public IEnumerable<Area> Areas { get; set; }
+        public IEnumerable<Square> Squares { get; set; }
+        public IEnumerable<Burial> Burials { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public int RowCounter { get; set; } = 1;
     }
