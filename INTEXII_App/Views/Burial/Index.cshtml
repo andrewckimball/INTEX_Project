@@ -1,85 +1,143 @@
 @model BurialListViewModel
+@using INTEXII_App.Models
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <link href="~/css/Burial/Index.css" rel="stylesheet" />
 
-<div>
+<style>
+
+</style>
+
+
+<label for="trigger" class="btn btn-primary">Filter</label>
+<input id="trigger" class="hidden" type="checkbox">
+
+<div class="box container">
+    <div class="">
+    @*FILTER FORM*@
     <form asp-controller="Burial" asp-action="Filter" method="post">
 
-        <div class="form-group">
+        <div class="form-group filters">
+            <div class="filter">
+                <label>Square:</label>
+                <select name="filter" class="form-control" )>
+                    @{string squareid = @ViewBag.Filters.Square;}
+                    <option value="@squareid">
+                        @{ if (ViewBag.Filters.Square == "")
+                                ViewBag.DisplayString = "";
+                            else
+                            {
+                                Square square = Model.Squares.Where(x => x.SquareId.ToString() == squareid).FirstOrDefault();
+                                ViewBag.DisplayString = @square.LowPairNs.ToString() + "/" + square.HighPairNs.ToString() + " " + square.BurialLocationNs + " " + square.LowPairEw.ToString() + "/" + square.HighPairEw.ToString() + " " + square.BurialLocationEw.ToString();
+                            } }
+                        @ViewBag.DisplayString
+                    </option>
 
-            <label>Square:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Square))")>
-                <option value="@ViewBag.Filters.Square">@ViewBag.Filters.Square</option>
-            </select>
+                    @foreach (Square s in ViewBag.Square)
+                    {
+        <option value="@s.SquareId">@s.LowPairNs/@s.HighPairNs  @s.BurialLocationNs @s.LowPairEw/@s.HighPairEw @s.BurialLocationEw</option>}
+                </select>
+            </div>
 
-            <label>Area:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Area))">
-                <option value="@ViewBag.Filters.Area">@ViewBag.Filters.Area</option>
-            </select>
-            
-            <label>Length:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Length))">
-                <option value="@ViewBag.Filters.Length">@ViewBag.Filters.Length</option>
-            </select>
+            <div class="filter">
+                <label>Area:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Area))">
+                    <option value="@ViewBag.Filters.Area">@ViewBag.Filters.Area</option>
+                </select>
+            </div>
 
-            <label>Depth:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Depth))">
-                <option value="@ViewBag.Filters.Depth">@ViewBag.Filters.Depth</option>
-            </select>
+            <div class="filter">
+                <label>Photo Taken:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.PhotoTaken))">
+                    <option value="@ViewBag.Filters.PhotoTaken">@ViewBag.Filters.PhotoTaken</option>
+                </select>
+            </div>
 
-            <label>Photo Taken:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.PhotoTaken))">
-                <option value="@ViewBag.Filters.PhotoTaken">@ViewBag.Filters.PhotoTaken</option>
-            </select>
+            <div class="filter">
+                <label>Burial Goods:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BurialGoods))">
+                    <option value="@ViewBag.Filters.BurialGoods">@ViewBag.Filters.BurialGoods</option>
+                </select>
+            </div>
 
-            <label>Burial Goods:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BurialGoods))">
-                <option value="@ViewBag.Filters.BurialGoods">@ViewBag.Filters.BurialGoods</option>
-            </select>
+            <div class="filter">
+                <label>Sex:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Sex))">
+                    <option value="@ViewBag.Filters.Sex">@ViewBag.Filters.Sex</option>
+                </select>
+            </div>
 
-            <label>Sex:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Sex))">
-                <option value="@ViewBag.Filters.Sex">@ViewBag.Filters.Sex</option>
-            </select>
+            <div class="filter">
+                <label>Hair Color:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HairColor))">
+                    <option value="@ViewBag.Filters.HairColor">@ViewBag.Filters.HairColor</option>
+                </select>
+            </div>
 
-            <label>Hair Color:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HairColor))">
-                <option value="@ViewBag.Filters.HairColor">@ViewBag.Filters.HairColor</option>
-            </select>
+            <div class="filter">
+                <label>Face Bundle:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.FaceBundle))">
+                    <option value="@ViewBag.Filters.FaceBundle">@ViewBag.Filters.FaceBundle</option>
+                </select>
+            </div>
 
-            <label>Face Bundle:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.FaceBundle))">
-                <option value="@ViewBag.Filters.FaceBundle">@ViewBag.Filters.FaceBundle</option>
-            </select>
+            <div class="filter">
+                <label>Head Direction:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HeadDirection))">
+                    <option value="@ViewBag.Filters.HeadDirection">@ViewBag.Filters.HeadDirection</option>
+                </select>
+            </div>
 
-            <label>Head Direction:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HeadDirection))">
-                <option value="@ViewBag.Filters.HeadDirection">@ViewBag.Filters.HeadDirection</option>
-            </select>
-
-            <label>Estimated Age:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.EstimatedAge))">
-                <option value="@ViewBag.Filters.EstimatedAge">@ViewBag.Filters.EstimatedAge</option>
-            </select>
+            <div class="filter">
+                <label>Estimated Age:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.EstimatedAge))">
+                    <option value="@ViewBag.Filters.EstimatedAge">@ViewBag.Filters.EstimatedAge</option>
+                </select>
+            </div>
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Filter</button>
+        <div class="filters">
+            <div class="filter">
+                <label>Min Length:</label>
+                <input name="filter" type="text" id="MinLength" class="form-control num" value="@ViewBag.Filters.MinLength" display="" />
+            </div>
 
-        <a asp-controller="Burial" asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+            <div class="filter">
+                <label>Max Length:</label>
+                <input name="filter" type="text" id="MaxLength" class="form-control num" value="@ViewBag.Filters.MaxLength" /> <br />
+            </div>
+
+            <div class="filter">
+                <label>Min Depth:</label>
+                <input name="filter" type="text" id="MinLength" class="form-control num" value="@ViewBag.Filters.MinDepth" />
+            </div>
+
+            <div class="filter">
+                <label>Max Depth:</label>
+                <input name="filter" type="text" id="MaxLength" class="form-control num" value="@ViewBag.Filters.MaxDepth" /> <br />
+            </div>
+
+        </div>
+
+        <div class="filter-buttons">
+            <button type="submit" class="btn btn-primary">Apply</button>
+            <a asp-controller="Burial" asp-action="Index" asp-route-id="" class="btn">Clear</a>
+        </div>
+       
 
     </form>
 </div>
 
+</div>
 
-<div class="container" >
-    <div class="panel" >
+
+
+<div class="container">
+    <div class="panel">
         <div class="panel-body" style="height:700px; overflow:scroll;">
-            <table class="table table-bordered bordered table-striped table-condensed datatable" >
+            <table class="table table-bordered bordered table-striped table-condensed datatable">
                 <thead>
                     <tr>
                         <th class="row-count-column"></th>
@@ -96,40 +154,41 @@
                 <tbody class="burial-table-body">
                     @foreach (var item in Model.Burials)
                     {
-                    <tr>
-                        <td class="row-count-column">@Model.RowCounter</td>
-                        <td class="burial-table-columns">
+        <tr>
+            <td class="row-count-column">@Model.RowCounter</td>
+            <td class="burial-table-columns">
 
-                            @item.SquareId
-                        </td>
-                        <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
-                        <td class="burial-table-columns">@item.BurialNumber</td>
-                        <td class="burial-table-columns">@item.Depth</td>
-                        <td class="burial-table-columns">@item.PhotoTaken</td>
-                        <td class="burial-table-columns">@item.BurialGoods</td>
+                @{ViewBag.TempSquare = Model.Squares.Where(x => item.SquareId == x.SquareId).FirstOrDefault();}
+                @ViewBag.TempSquare.LowPairNs/@ViewBag.TempSquare.HighPairNs @ViewBag.TempSquare.BurialLocationNs
+                @ViewBag.TempSquare.LowPairEw/@ViewBag.TempSquare.HighPairEw @ViewBag.TempSquare.BurialLocationEw
 
-                        @if (!String.IsNullOrEmpty(item.Description))
-                        {
-                            if (@item.Description.Length >= 30)
-                            {
-                                <td class="burial-table-columns">@item.Description.Substring(0, 30) ...</td>
-                            }
-                            else
-                            {
-                                <td class="burial-table-columns">@item.Description ...</td>                    }
-                            }
-                        else
-                        {
-                            <td></td>
-                        }
+            </td>
+            <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
+            <td class="burial-table-columns">@item.BurialNumber</td>
+            <td class="burial-table-columns">@item.Depth</td>
+            <td class="burial-table-columns">@item.PhotoTaken</td>
+            <td class="burial-table-columns">@item.BurialGoods</td>
 
-                    <td class="burial-table-columns">
-                        <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
-                    </td>
-                    </tr>
-                        Model.RowCounter++;
+            @if (!String.IsNullOrEmpty(item.Description))
+            {
+                if (@item.Description.Length >= 30)
+                {
+                    <td class="burial-table-columns">@item.Description.Substring(0, 30) ...</td> }
+                else
+                {
+                    <td class="burial-table-columns">@item.Description ...</td>
+                }
+            }
+            else
+            {
+            <td></td>}
+
+            <td class="burial-table-columns">
+                <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
+            </td>
+        </tr>Model.RowCounter++;
                     }
                 </tbody>
             </table>
@@ -137,9 +196,9 @@
         </div>
 
         <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-                page-class-normal="btn-outline-dark"
-                page-class-selected="btn-primary"
-                class="btn-group pull-right m-1">
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary"
+             class="btn-group pull-right m-1">
         </div>
 
     </div>

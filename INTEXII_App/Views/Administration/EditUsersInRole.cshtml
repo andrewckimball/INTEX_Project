@@ -4,6 +4,7 @@
     var roleId = ViewBag.roleId;
 }
 
+<!--View to add or remove users from a given role-->
 <br />
 <div class="text-center">
     <h2>Add/Remove Users</h2>
@@ -12,9 +13,10 @@
 <form method="post">
     <div class="card">
         <div class="card-header">
-            Use the checkboxes to add or remove users from the this role
+            Use the checkboxes to add users to or remove users from this role
         </div>
         <div class="card-body">
+            <!--Looping through each UserRole to display user and a checkbox, which will be passed to controller-->
             @for (int i = 0; i < Model.Count; i++)
             {
                 <div class="form-check m-1">
@@ -27,6 +29,7 @@
                 </div>
             }
         </div>
+        <!--Div to cancel-->
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
             <a asp-action="EditRole" asp-route-id="@roleId" class="btn btn-primary" style="width:auto">Cancel</a>

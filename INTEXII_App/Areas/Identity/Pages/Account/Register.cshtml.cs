@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
+//Scaffolded Register page, 2 edits made (specified below)
 namespace INTEXII_App.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -109,13 +110,14 @@ namespace INTEXII_App.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        //adding this code 
+                        //If statement to allow the admin to enter a new user and not be logged in as him/her
                         if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             return RedirectToAction("ListUsers", "Administration");
                         }
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        //Redirect to two factor authentication for new users
+                        return LocalRedirect("~/Identity/Account/Manage/TwoFactorAuthentication"); //LocalRedirect(returnUrl)
                     }
                 }
                 foreach (var error in result.Errors)

@@ -8,6 +8,7 @@ namespace INTEXII_App.Models.AdminModel
 {
     public class AdminRegister
     {
+        //Model for the admin to register a new user, providing all the information for a normal registration
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "First Name")]

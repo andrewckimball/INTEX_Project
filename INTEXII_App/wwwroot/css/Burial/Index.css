@@ -24,3 +24,57 @@
     font-size: 12px;
 }
 
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: ceter;
+}
+
+.filter {
+    width: 20%;
+    line-height: 2;
+}
+
+.form-control {
+    width: 80%;
+}
+
+    .form-control.num {
+        width: 30%;
+    }
+
+.box {
+    display: none;
+}
+
+#trigger:checked + .box {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 4px 5px 25px 5px rgba(0,0,0,0.33);
+    padding: 20px;
+    border-radius: 1rem;
+}
+
+.filter-buttons {
+    margin: auto;
+    text-align: center;
+}
+
+.hidden {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+
+input[type=checkbox] + label {
+    color: #ccc;
+    font-style: italic;
+}
+
+input[type=checkbox]:checked + label {
+    color: #f00;
+    font-style: normal;
+}
+

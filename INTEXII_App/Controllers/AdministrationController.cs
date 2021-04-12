@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace INTEXII_App.Controllers
 {
-    [Authorize(Roles = "Admin")] 
+    //Administration controller handles authentication, authorization, and access control
+    [Authorize(Roles = "Admin")]  //Only admins can access the functionility of this controller
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager; //might need to delete
+        private readonly SignInManager<ApplicationUser> signInManager; 
 
         public AdministrationController(RoleManager<IdentityRole> roleManager, 
                                         UserManager<ApplicationUser> userManager,
@@ -24,22 +25,23 @@ namespace INTEXII_App.Controllers
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
-            this.signInManager = signInManager; //might need to delete
+            this.signInManager = signInManager;
         }
 
-
+        //Returns the create role view
         [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
         }
 
+        //Creates a role in the system that connects to ASPNETROLES table in LoginUsers database
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRole model)
         {
             if (ModelState.IsValid)
             {
-                IdentityRole identityRole = new IdentityRole
+                IdentityRole identityRole = new IdentityRole //create a new identity role instance
                 {
                     Name = model.RoleName
                 };
@@ -61,6 +63,7 @@ namespace INTEXII_App.Controllers
             return View(model);
         }
 
+        //Display list of roles in the LIstRolesView
         [HttpGet]
         public IActionResult ListRoles()
         {
@@ -68,9 +71,11 @@ namespace INTEXII_App.Controllers
             return View(roles);
         }
 
+        //View that allows for editing roles to the system
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
+            //Pass id associated with role
             var role = await roleManager.FindByIdAsync(id);
 
             if(role == null)
@@ -79,12 +84,14 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
+            //Create instance of EditRole model
             var model = new EditRole
             {
                 Id = role.Id,
                 RoleName = role.Name
             };
 
+            //Loop to display all users associated with the role selected
             foreach(var user in userManager.Users)
             {
                 if (await userManager.IsInRoleAsync(user, role.Name))
@@ -99,6 +106,7 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRole model)
         {
+            //Set role to the original role name
             var role = await roleManager.FindByIdAsync(model.Id);
 
             if (role == null)
@@ -108,11 +116,13 @@ namespace INTEXII_App.Controllers
             }
             else
             {
+                //Change role name
                 role.Name = model.RoleName;
                 var result = await roleManager.UpdateAsync(role);
 
                 if (result.Succeeded)
                 {
+                    //Redirect to the ListRoles view, updating the model
                     return RedirectToAction("ListRoles");
                 }
 
@@ -131,6 +141,7 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
         {
+            //Pass in id and set it to "role" variable
             var role = await roleManager.FindByIdAsync(id);
 
             if (role == null)
@@ -140,6 +151,7 @@ namespace INTEXII_App.Controllers
             }
             else
             {
+                //Using DeleteAsync() method to delte role
                 var result = await roleManager.DeleteAsync(role);
 
                 if (result.Succeeded)
@@ -156,11 +168,14 @@ namespace INTEXII_App.Controllers
             }
         }
 
+        //Edit the users associated with the selected role
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
+            //Using viewbag to pass the roleId from the view to the controller
             ViewBag.roleId = roleId;
 
+            //Using roleManager to get the role variable populated with the info for the role
             var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
@@ -169,8 +184,10 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
+            //Creating instance of a list of UserRoles
             var model = new List<UserRole>();
 
+            //Loop through each user in the database to check if they are in the role
             foreach(var user in userManager.Users)
             {
                 var userRole = new UserRole
@@ -179,30 +196,37 @@ namespace INTEXII_App.Controllers
                     UserName = user.UserName
                 };
 
+                //If user in is the selected role, then IsSelected checkbox will be checked
                 if(await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userRole.IsSelected = true;
                 }
+                //Otherwise the checkbox will be empty
                 else
                 {
                     userRole.IsSelected = false;
                 }
+                //Add all the roles to the model
                 model.Add(userRole);
             }
             return View(model);
         }
 
+        //Post method to handle post request of the editusersinrole
         [HttpPost]
-        public async Task<IActionResult> EditUsersInRole(List<UserRole> model, string roleId)
+        public async Task<IActionResult> EditUsersInRole(List<UserRole> model, string roleId) //Passing in UserRoles and roleId
         {
+            //Set role equal to the role, as determined by the roleId
             var role = await roleManager.FindByIdAsync(roleId);
 
+            //Return error page if the role is null
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with ID = {roleId} cannot be found";
                 return View("NotFound");
             }
 
+            //Loop through each model
             for (int i = 0; i < model.Count; i++)
             {
                 var user = await userManager.FindByIdAsync(model[i].UserId);
@@ -214,7 +238,7 @@ namespace INTEXII_App.Controllers
                 {
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }
-                //else if user is not selected and already in the role, remove him/her
+                //Else if user is not selected and already in the role, remove him/her
                 else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
                 {
                     result = await userManager.RemoveFromRoleAsync(user, role.Name);
@@ -238,6 +262,7 @@ namespace INTEXII_App.Controllers
             return RedirectToAction("EditRole", new { Id = roleId });
         }
 
+        //Get method to display ListUsers view
         [HttpGet]
         public IActionResult ListUsers()
         {
@@ -245,7 +270,7 @@ namespace INTEXII_App.Controllers
             return View(users);
         }
 
-
+        //Get method to display EditUser view
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -257,11 +282,10 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
-            // GetClaimsAsync retunrs the list of user Claims
-            var userClaims = await userManager.GetClaimsAsync(user);
-            // GetRolesAsync returns the list of user Roles
+            //Returning the list of user Roles
             var userRoles = await userManager.GetRolesAsync(user);
 
+            //Bringing in the EditUser model
             var model = new EditUser
             {
                 Id = user.Id,
@@ -275,9 +299,11 @@ namespace INTEXII_App.Controllers
             return View(model);
         }
 
+        //Posting form for EditUser view, passing in the EditUser model
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUser model)
         {
+            //Set user equal to the id that was passed from the view
             var user = await userManager.FindByIdAsync(model.Id);
 
             if (user == null)
@@ -287,11 +313,13 @@ namespace INTEXII_App.Controllers
             }
             else
             {
+                //Updating the email, username, fname, and lname of user
                 user.Email = model.Email;
                 user.UserName = model.UserName;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
 
+                //Update the user to the result variable - using UpdateAsync method
                 var result = await userManager.UpdateAsync(user);
 
                 if (result.Succeeded)
@@ -308,9 +336,11 @@ namespace INTEXII_App.Controllers
             }
         }
 
+        //Deleting the user, passing in the id associated with the user from the view
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
+            //FindByIdAsync method to get the user information and set it to user variable
             var user = await userManager.FindByIdAsync(id);
 
             if (user == null)
@@ -320,6 +350,7 @@ namespace INTEXII_App.Controllers
             }
             else
             {
+                //Deleting the user
                 var result = await userManager.DeleteAsync(user);
 
                 if (result.Succeeded)
@@ -336,11 +367,14 @@ namespace INTEXII_App.Controllers
             }
         }
 
+        //Handles the ManageUserRoles view, passing in the userId
         [HttpGet]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
+            //Viewbag connects view to controller
             ViewBag.userId = userId;
 
+            //Set the user to the user wit the userId that was passed in
             var user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -349,6 +383,7 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
+            //Set model to  instance of mangeruserroles model
             var model = new List<ManageUserRoles>();
 
             //Loop through all the roles to display
@@ -365,6 +400,7 @@ namespace INTEXII_App.Controllers
                 {
                     userRolesViewModel.IsSelected = true;
                 }
+                //Else set the boolean checkbox to false
                 else
                 {
                     userRolesViewModel.IsSelected = false;
@@ -376,9 +412,11 @@ namespace INTEXII_App.Controllers
             return View(model);
         }
 
+        //Post method to update the users in each role - passing in the ManageUserRoles model and the userId
         [HttpPost]
         public async Task<IActionResult>ManageUserRoles(List<ManageUserRoles> model, string userId)
         {
+            //Set the user to 
             var user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -387,7 +425,9 @@ namespace INTEXII_App.Controllers
                 return View("NotFound");
             }
 
+            //Get the user's roles
             var roles = await userManager.GetRolesAsync(user);
+            //Remove the user's roles
             var result = await userManager.RemoveFromRolesAsync(user, roles);
 
             if (!result.Succeeded)
@@ -396,7 +436,7 @@ namespace INTEXII_App.Controllers
                 return View(model);
             }
 
-            //Add all selected roles to user (only those roles that are selected)
+            //Add all selected roles to user - using linq query to get only those that are selected
             result = await userManager.AddToRolesAsync(user,
                 model.Where(x => x.IsSelected).Select(y => y.RoleName));
 
