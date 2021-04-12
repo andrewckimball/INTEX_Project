@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -43,6 +44,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: FieldBook/Create
+        [Authorize(Roles = "Admin,Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +55,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Create([Bind("FieldBookId,Name,Description")] FieldBook fieldBook)
         {
             if (ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: FieldBook/Edit/5
+        //[Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -85,6 +89,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal id, [Bind("FieldBookId,Name,Description")] FieldBook fieldBook)
         {
             if (id != fieldBook.FieldBookId)
@@ -116,6 +121,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: FieldBook/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace INTEXII_App.Controllers
         // POST: FieldBook/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
             var fieldBook = await _context.FieldBooks.FindAsync(id);

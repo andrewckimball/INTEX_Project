@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -43,6 +44,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Area/Create
+        [Authorize(Roles = "Admin,Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -65,6 +67,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Area/Edit/5
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -85,6 +88,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal id, [Bind("AreaId,Area1")] Area area)
         {
             if (id != area.AreaId)
@@ -116,6 +120,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Area/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -134,6 +139,7 @@ namespace INTEXII_App.Controllers
         }
 
         // POST: Area/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(decimal id)

@@ -1,41 +1,53 @@
 @model IEnumerable<INTEXII_App.Models.Artifact>
+@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<divHeader>
+    <link href="~/DynamicTable/StyleSheet.css" rel="stylesheet" />
+</divHeader>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialId)
-            </td>
-            <td>
+<br />
+
+<div class="container">
+    <h2>Burial Artifacts</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">@Html.DisplayNameFor(model => model.Description)</div>
+            <div class="col col-2">@Html.DisplayNameFor(model => model.Burial)</div>
+                <div class="col col-7"></div>
+
+        </li>
+        @foreach (var item in Model)
+        {
+    <li class="table-row">
+        <div class="col col-1" data-label="@Html.DisplayNameFor(model => model.Description)">@Html.DisplayFor(modelItem => item.Description)</div>
+        <div class="col col-2" data-label="@Html.DisplayNameFor(model => model.Burial)">@Html.DisplayFor(modelItem => item.Burial.BurialId)</div>
+        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+        {
+            <div class="col col-7" data-label="">
                 <a asp-action="Edit" asp-route-id="@item.ArtifactId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ArtifactId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ArtifactId">Delete</a>
-            </td>
-        </tr>
+            </div>
+        }
+        else
+        {
+            <a asp-action="Details" asp-route-id="@item.ArtifactId">Details</a>
+        }
+    </li>
+        }
+
+
+    </ul>
+</div>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+{
+    <a class="btn btn-primary"
+       style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+       asp-controller="Square"
+       asp-action="Create">Add Record</a>
 }
-    </tbody>
-</table>
