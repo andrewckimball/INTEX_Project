@@ -2,6 +2,7 @@
 using INTEXII_App.Areas.Identity.Data;
 using INTEXII_App.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,15 @@ namespace INTEXII_App.Areas.Identity
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
 
+                services.ConfigureApplicationCookie(options =>
+                {
+                    //options.LoginPath = new PathString("/[your-path]");
+                    options.AccessDeniedPath = new PathString("/Home/PermissionDenied");
+                    //options.LogoutPath = new PathString("/[your-path]");
+                });
+
             });
+
         }
     }
 }

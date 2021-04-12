@@ -1,65 +1,56 @@
 @model IEnumerable<INTEXII_App.Models.Square>
+@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Burial Squares</h1>
+<divHeader>
+    <link href="~/DynamicTable/StyleSheet.css" rel="stylesheet" />
+</divHeader>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LowPairNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighPairNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowPairEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighPairEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialLocationNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialLocationEw)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationEw)
-            </td>
-            <td>
+<br />
+
+<div class="container">
+    <h2>Burial Squares </h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">@Html.DisplayNameFor(model => model.LowPairNs)</div>
+            <div class="col col-2">@Html.DisplayNameFor(model => model.HighPairNs)</div>
+            <div class="col col-3">@Html.DisplayNameFor(model => model.LowPairEw)</div>
+            <div class="col col-4">@Html.DisplayNameFor(model => model.HighPairEw)</div>
+            <div class="col col-5">@Html.DisplayNameFor(model => model.HighPairEw)</div>
+            <div class="col col-6">@Html.DisplayNameFor(model => model.HighPairEw)</div>
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+            {
+                <div class="col col-7"></div>
+            }
+            </li>
+        @foreach (var item in Model)
+        {
+    <li class="table-row">
+        <div class="col col-1" data-label="@Html.DisplayNameFor(model => model.LowPairNs)">@Html.DisplayFor(modelItem => item.LowPairNs)</div>
+        <div class="col col-2" data-label="@Html.DisplayNameFor(model => model.HighPairNs)">@Html.DisplayFor(modelItem => item.HighPairNs)</div>
+        <div class="col col-3" data-label="@Html.DisplayNameFor(model => model.LowPairEw)">@Html.DisplayFor(modelItem => item.LowPairEw)</div>
+        <div class="col col-4" data-label="@Html.DisplayNameFor(model => model.HighPairEw)">@Html.DisplayFor(modelItem => item.HighPairEw)</div>
+        <div class="col col-5" data-label="@Html.DisplayNameFor(model => model.HighPairEw)">@Html.DisplayFor(modelItem => item.BurialLocationNs)</div>
+        <div class="col col-6" data-label="@Html.DisplayNameFor(model => model.HighPairEw)">@Html.DisplayFor(modelItem => item.BurialLocationEw)</div>
+        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+        {
+            <div class="col col-7" data-label="">
                 <a asp-action="Edit" asp-route-id="@item.SquareId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SquareId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.SquareId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </div>
+        }
+        </li>
+        }
+
+
+    </ul>
+</div>
+
+<a class="btn btn-primary"
+   style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+   asp-controller="Square"
+   asp-action="Create">Add Record</a>

@@ -1,24 +1,36 @@
 @model INTEXII_App.Models.Area
+@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<br />
+<h1> Area Details</h1>
+<br />
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.AreaId">Edit Burial Details</a>
+    <br />
+    <br />
+}
 
 <div>
     <h4>Area</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Area1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Area1)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AreaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<a class="btn btn-primary"
+   style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+   asp-controller="Area"
+   asp-action="Index">Back to List</a>
