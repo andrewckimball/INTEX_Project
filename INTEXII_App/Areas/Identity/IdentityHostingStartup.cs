@@ -21,6 +21,7 @@ namespace INTEXII_App.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
+
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //true if want email confirmation
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
