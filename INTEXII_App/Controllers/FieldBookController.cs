@@ -96,7 +96,10 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(fieldBook);
+                    //var test = _context.Model(fieldBook.FieldBookId);
+
+
+                    _context.Update(fieldBook); ///test
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

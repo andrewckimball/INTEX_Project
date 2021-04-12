@@ -21,7 +21,11 @@ namespace INTEXII_App.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)  //true if want email confirmation
+                services.AddDefaultIdentity<ApplicationUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    //options.Password.RequiredLength = 10;   //Requiring passwords to be 10 characters, minimun
+                }) 
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
 
