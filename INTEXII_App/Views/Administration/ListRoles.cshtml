@@ -22,6 +22,7 @@
                     <td width="300">@role.Id</td>
                     <td>@role.Name</td>
                     <td>
+                        <!--Post method handles the deleting of rolesA-->
                         <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                             <a class="btn btn-primary" style="width:auto" asp-action="EditRole" asp-controller="Administration"
                                asp-route-id="@role.Id">Edit</a>

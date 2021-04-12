@@ -1,4 +1,6 @@
-﻿@page
+﻿@* Custom TwoFactorAuthentication Page *@
+
+@page
 @model TwoFactorAuthenticationModel
 @{
     ViewData["Title"] = "Two-factor authentication (2FA)";
@@ -34,26 +36,40 @@
     if (Model.IsMachineRemembered)
     {
         <form method="post" style="display: inline-block">
-            <button type="submit" class="btn btn-default">Forget this browser</button>
-        </form>
+            <button type="submit" class="btn btn-primary">Forget this browser</button>
+        </form><br />
     }
-    <a asp-page="./Disable2fa" class="btn btn-default">Disable 2FA</a>
-    <a asp-page="./GenerateRecoveryCodes" class="btn btn-default">Reset recovery codes</a>
+    @*<a asp-page="./Disable2fa" class="btn btn-default">Disable 2FA</a>
+        <a asp-page="./GenerateRecoveryCodes" class="btn btn-default">Reset recovery codes</a>*@
 }
 
 <br />
-@*<h5>We highly recommend setting up an Authenticator app with your new account</h5>*@
+
+@* Check if the user has authentication and 2factor enabled *@
 @if (!Model.HasAuthenticator)
 {
-    <h6>We highly recommend setting up an Authenticator app with your new account before proceeding</h6><br />
+    <h6>We highly recommend setting up an Authenticator app with your new account before proceeding</h6>
+    <br />
     <a button="btn btn-primary" id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
-    <a button="btn btn-primary" id="enable-authenticator" asp-action="Index" asp-controller="Home" class="btn btn-primary">Proceed to home page</a>
+    <a button="btn btn-primary" id="" asp-action="Index" asp-controller="Home" class="btn btn-primary">Proceed to home page</a>
+}
+else if (!Model.Is2faEnabled)
+{
+    <h6>We highly recommend setting up an Authenticator app with your account</h6>
+    <br />
+    <a button="btn btn-primary" id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
+    <a button="btn btn-primary" id="" asp-action="Index" asp-controller="Home" class="btn btn-primary">Proceed to home page</a>
 
 }
 else
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Setup authenticator app</a>
+    <a asp-page="./Disable2fa" class="btn btn-primary">Disable 2FA</a>
+    <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
+    <br />
+    <br />
     <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Reset authenticator app</a>
+    <a button="btn btn-primary" id="" asp-action="Index" asp-controller="Home" class="btn btn-primary">Proceed to home page</a>
+
 }
 
 @section Scripts {

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
+//Scaffolded Register page, 2 edits made (specified below)
 namespace INTEXII_App.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -115,6 +116,7 @@ namespace INTEXII_App.Areas.Identity.Pages.Account
                             return RedirectToAction("ListUsers", "Administration");
                         }
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        //Redirect to two factor authentication for new users
                         return LocalRedirect("~/Identity/Account/Manage/TwoFactorAuthentication"); //LocalRedirect(returnUrl)
                     }
                 }
