@@ -5,6 +5,77 @@
 }
 
 <link href="~/css/Burial/Index.css" rel="stylesheet" />
+
+<div>
+    <form asp-controller="Burial" asp-action="Filter" method="post">
+
+        <div class="form-group">
+
+            <label>Square:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Square))")>
+                <option value="@ViewBag.Filters.Square">@ViewBag.Filters.Square</option>
+            </select>
+
+            <label>Area:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Area))">
+                <option value="@ViewBag.Filters.Area">@ViewBag.Filters.Area</option>
+            </select>
+            
+            <label>Length:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Length))">
+                <option value="@ViewBag.Filters.Length">@ViewBag.Filters.Length</option>
+            </select>
+
+            <label>Depth:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Depth))">
+                <option value="@ViewBag.Filters.Depth">@ViewBag.Filters.Depth</option>
+            </select>
+
+            <label>Photo Taken:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.PhotoTaken))">
+                <option value="@ViewBag.Filters.PhotoTaken">@ViewBag.Filters.PhotoTaken</option>
+            </select>
+
+            <label>Burial Goods:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BurialGoods))">
+                <option value="@ViewBag.Filters.BurialGoods">@ViewBag.Filters.BurialGoods</option>
+            </select>
+
+            <label>Sex:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Sex))">
+                <option value="@ViewBag.Filters.Sex">@ViewBag.Filters.Sex</option>
+            </select>
+
+            <label>Hair Color:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HairColor))">
+                <option value="@ViewBag.Filters.HairColor">@ViewBag.Filters.HairColor</option>
+            </select>
+
+            <label>Face Bundle:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.FaceBundle))">
+                <option value="@ViewBag.Filters.FaceBundle">@ViewBag.Filters.FaceBundle</option>
+            </select>
+
+            <label>Head Direction:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.HeadDirection))">
+                <option value="@ViewBag.Filters.HeadDirection">@ViewBag.Filters.HeadDirection</option>
+            </select>
+
+            <label>Estimated Age:</label>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.EstimatedAge))">
+                <option value="@ViewBag.Filters.EstimatedAge">@ViewBag.Filters.EstimatedAge</option>
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+
+        <a asp-controller="Burial" asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+
+    </form>
+</div>
+
+
 <div class="container" >
     <div class="panel" >
         <div class="panel-body" style="height:700px; overflow:scroll;">
@@ -28,27 +99,24 @@
                     <tr>
                         <td class="row-count-column">@Model.RowCounter</td>
                         <td class="burial-table-columns">
-                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairNs/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairNs
-                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationNs
 
-                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().LowPairEw/@Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().HighPairEw
-                            @Model.Squares.Where(x => x.SquareId == item.SquareId).FirstOrDefault().BurialLocationEw
+                            @item.SquareId
                         </td>
                         <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
-                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().BurialNumber</td>
-                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Depth</td>
-                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().PhotoTaken</td>
-                        <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().BurialGoods</td>
+                        <td class="burial-table-columns">@item.BurialNumber</td>
+                        <td class="burial-table-columns">@item.Depth</td>
+                        <td class="burial-table-columns">@item.PhotoTaken</td>
+                        <td class="burial-table-columns">@item.BurialGoods</td>
 
-                        @if (!String.IsNullOrEmpty(@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description))
+                        @if (!String.IsNullOrEmpty(item.Description))
                         {
-                            if (@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description.Length >= 30)
+                            if (@item.Description.Length >= 30)
                             {
-                                <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description.Substring(0, 30) ...</td>
+                                <td class="burial-table-columns">@item.Description.Substring(0, 30) ...</td>
                             }
                             else
                             {
-                                <td class="burial-table-columns">@Model.Burials.Where(x => x.BurialId == item.BurialId).FirstOrDefault().Description ...</td>                    }
+                                <td class="burial-table-columns">@item.Description ...</td>                    }
                             }
                         else
                         {

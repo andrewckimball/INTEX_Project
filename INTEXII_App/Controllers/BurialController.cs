@@ -19,26 +19,109 @@ namespace INTEXII_App.Controllers
             _context = context;
         }
 
-        private int PageSize = 50;
+        private int PageSize = 10;
+
+        //List<int> square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
 
         // GET: Burial
-        public async Task<IActionResult> Index(string category, int page = 1)
+        public async Task<IActionResult> Index(string id, int page = 1)
         {
 
-            return View(new BurialListViewModel
+            var filters = new Filters(id);
+            ViewBag.Filters = filters;
+
+            ViewBag.Square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
+            ViewBag.Area = new List<string> {"NE", "NW", "SW", "SE" };
+            ViewBag.Length = _context.Burials.Select(p => p.Length).Distinct().ToList();
+            ViewBag.Depth = _context.Burials.Select(p => p.Depth).Distinct().ToList();
+            ViewBag.PhotoTaken = new List<string> { "true", "false"};
+            ViewBag.BurialGoods = new List<string> { "true", "false" };
+            ViewBag.Sex = new List<string> { "U", "F", "M", "S" };
+            ViewBag.HairColor = new List<string> { "Blonde", "Red Brown", "Light Brown", "Brown", "Red", "Black", "Dark Brown"};
+            ViewBag.FaceBundle = new List<string> { "U", "Y" };
+            ViewBag.HeadDirection = new List<string> { "E", "I", "U", "W"};
+            ViewBag.EstimatedAge = _context.Burials.Select(p => p.EstimatedAge).Distinct().ToList();
+
+            BurialListViewModel burialListViewModel = new BurialListViewModel
             {
-                Areas = await _context.Areas.ToListAsync(),
-                Squares = await _context.Squares.ToListAsync(),
-                Burials = await _context.Burials.Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                
+
+                Areas = _context.Areas,
+                Squares = _context.Squares,
+                Burials =  _context.Burials,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalNumItems = _context.Burials.Count() 
+                    TotalNumItems = _context.Burials.Count()
                     //TotalNumItems = category == null ? _context.Burials.Count() : _context.Burials.Where(x => x.Type == category).Count()/
                 }
-            });
+            };
+
+            if (filters.HasSquare)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.SquareId == Convert.ToDecimal(filters.Square));
+            }
+
+            if (filters.HasArea)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.AreaId == burialListViewModel.Areas.Where(x => x.Area1 == filters.Area).FirstOrDefault().AreaId);
+            }
+
+            if (filters.HasLength)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Length == Convert.ToDecimal(filters.Length));
+            }
+            if (filters.HasPhotoTaken)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.PhotoTaken == Convert.ToBoolean(filters.PhotoTaken));
+            }
+            if (filters.HasBurialGoods)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.BurialGoods == Convert.ToBoolean(filters.BurialGoods));
+            }
+
+            if (filters.HasSex)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.SexBody == filters.Sex);
+            }
+
+            if (filters.HasHairColor)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.HairColor == filters.HairColor);
+            }
+
+            if (filters.HasFaceBundle)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.FaceBundle == filters.FaceBundle);
+            }
+
+            if (filters.HasHeadDirection)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.HeadDirection == filters.HeadDirection);
+            }
+            if (filters.HasEstimatedAge)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.EstimatedAge == filters.Square);
+            }
+
+            burialListViewModel.Burials = burialListViewModel.Burials.Skip((page - 1) * PageSize).Take(PageSize);
+            return View("Index", burialListViewModel);
         }
+
+
+        // Filter
+        [HttpPost]
+        public IActionResult Filter(string[] filter)
+        {
+            ViewBag.Area = _context.Areas.Select(p => p.AreaId).Distinct().ToList();
+
+            string id = string.Join('-', filter);
+            return RedirectToAction("Index", new { ID = id });
+        }
+
+
+
 
         // GET: Burial/Details/5
         public async Task<IActionResult> Details(decimal? id)
