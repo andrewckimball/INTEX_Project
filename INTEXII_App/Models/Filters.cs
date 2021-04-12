@@ -9,19 +9,21 @@ namespace INTEXII_App.Models
     {
         public Filters(string filterstring)
         {
-            FilterString = filterstring ?? "all-all-all-all-all-all-all-all-all-all-all";
+            FilterString = filterstring ?? "------------";
             string[] filters = FilterString.Split('-');
             Square = filters[0];
             Area = filters[1];
-            Length = filters[2];
-            Depth = filters[3];
-            PhotoTaken = filters[4];
-            BurialGoods = filters[5];
-            Sex = filters[6];
-            HairColor = filters[7];
-            FaceBundle = filters[8];
-            HeadDirection = filters[9];
-            EstimatedAge = filters[10];
+            PhotoTaken = filters[2];
+            BurialGoods = filters[3];
+            Sex = filters[4];
+            HairColor = filters[5];
+            FaceBundle = filters[6];
+            HeadDirection = filters[7];
+            EstimatedAge = filters[8];
+            MinLength = filters[9];
+            MaxLength = filters[10];
+            MinDepth = filters[11];
+            MaxDepth = filters[12];
         }
 
         public string FilterString { get; }
@@ -29,8 +31,10 @@ namespace INTEXII_App.Models
         // Filter columns
         public string Square { get; }
         public string Area { get; }
-        public string Length { get; }
-        public string Depth { get; }
+        public string MinLength { get; }
+        public string MaxLength { get; }
+        public string MinDepth { get; }
+        public string MaxDepth { get; }
         public string PhotoTaken { get; }
         public string BurialGoods { get; }
         public string Sex { get; }
@@ -40,16 +44,19 @@ namespace INTEXII_App.Models
         public string EstimatedAge { get; }
 
 
-        public bool HasSquare => Square.ToLower() != "all";
-        public bool HasArea => Area.ToLower() != "all";
-        public bool HasLength => Depth.ToLower() != "all";
-        public bool HasPhotoTaken => PhotoTaken.ToLower() != "all";
-        public bool HasBurialGoods => BurialGoods.ToLower() != "all";
-        public bool HasSex => Sex.ToLower() != "all";
-        public bool HasHairColor => HairColor.ToLower() != "all";
-        public bool HasFaceBundle => FaceBundle.ToLower() != "all";
-        public bool HasHeadDirection => HeadDirection.ToLower() != "all";
-        public bool HasEstimatedAge => EstimatedAge.ToLower() != "all";
+        public bool HasSquare => Square.ToLower() != "";
+        public bool HasArea => Area.ToLower() != "";
+        public bool HasMinLength => MinLength.ToLower() != "";
+        public bool HasMaxLength => MaxLength.ToLower() != "";
+        public bool HasMinDepth => MinDepth.ToLower() != "";
+        public bool HasMaxDepth => MaxDepth.ToLower() != "";
+        public bool HasPhotoTaken => PhotoTaken.ToLower() != "";
+        public bool HasBurialGoods => BurialGoods.ToLower() != "";
+        public bool HasSex => Sex.ToLower() != "";
+        public bool HasHairColor => HairColor.ToLower() != "";
+        public bool HasFaceBundle => FaceBundle.ToLower() != "";
+        public bool HasHeadDirection => HeadDirection.ToLower() != "";
+        public bool HasEstimatedAge => EstimatedAge.ToLower() != "";
 
         public static Dictionary<string, string> DueFilterValues =>
             new Dictionary<string, string>

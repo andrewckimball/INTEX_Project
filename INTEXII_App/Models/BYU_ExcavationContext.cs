@@ -565,6 +565,13 @@ namespace INTEXII_App.Models
                 entity.Property(e => e.LowPairNs)
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("LowPairNS");
+
+                //entity.Property(e => e.SquareIdString)
+                //    .IsRequired()
+                //    .HasMaxLength(50)
+                //    .IsUnicode(false)
+                //    .HasColumnName("SquareIdString");
+
             });
 
             OnModelCreatingPartial(modelBuilder);
