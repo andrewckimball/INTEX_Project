@@ -26,11 +26,21 @@ namespace INTEXII_App.Controllers
         // GET: Burial
         public async Task<IActionResult> Index(string id, int page = 1)
         {
-
+            // Drop down options for filters
             var filters = new Filters(id);
             ViewBag.Filters = filters;
 
-            ViewBag.Square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
+            //List<string> squareIds = new List<string>();
+            
+
+            //foreach (Square s in _context.Squares.Distinct().ToList())
+            //{
+            //    string squareId = s.LowPairNs.ToString() + '/' + s.HighPairNs.ToString() + ' ' + s.BurialLocationNs.ToString() + ' ' + s.LowPairEw.ToString() + '/' + s.HighPairEw.ToString() + ' ' + s.BurialLocationEw.ToString();
+            //    squareIds.Add(squareId);
+            //}
+
+            ViewBag.Square = _context.Squares.Distinct().ToList();
+
             ViewBag.Area = new List<string> {"NE", "NW", "SW", "SE" };
             ViewBag.Length = _context.Burials.Select(p => p.Length).Distinct().ToList();
             ViewBag.Depth = _context.Burials.Select(p => p.Depth).Distinct().ToList();
@@ -44,8 +54,6 @@ namespace INTEXII_App.Controllers
 
             BurialListViewModel burialListViewModel = new BurialListViewModel
             {
-                
-
                 Areas = _context.Areas,
                 Squares = _context.Squares,
                 Burials =  _context.Burials,
@@ -58,6 +66,7 @@ namespace INTEXII_App.Controllers
                 }
             };
 
+            // Filter context based on filters
             if (filters.HasSquare)
             {
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.SquareId == Convert.ToDecimal(filters.Square));
@@ -114,7 +123,8 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         public IActionResult Filter(string[] filter)
         {
-            ViewBag.Area = _context.Areas.Select(p => p.AreaId).Distinct().ToList();
+            //ViewBag.Area = _context.Areas.Select(p => p.AreaId).Distinct().ToList();
+            filter[0] = "1";
 
             string id = string.Join('-', filter);
             return RedirectToAction("Index", new { ID = id });

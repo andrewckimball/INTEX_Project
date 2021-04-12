@@ -1,4 +1,5 @@
 @model BurialListViewModel
+@using INTEXII_App.Models
 
 @{
     ViewData["Title"] = "Index";
@@ -11,8 +12,9 @@
 
         <div class="form-group">
 
+
             <label>Square:</label>
-            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Square))")>
+            <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Square, "SquareId", "SquareIdString"))" )>
                 <option value="@ViewBag.Filters.Square">@ViewBag.Filters.Square</option>
             </select>
 
@@ -20,7 +22,7 @@
             <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Area))">
                 <option value="@ViewBag.Filters.Area">@ViewBag.Filters.Area</option>
             </select>
-            
+
             <label>Length:</label>
             <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Length))">
                 <option value="@ViewBag.Filters.Length">@ViewBag.Filters.Length</option>
@@ -100,7 +102,10 @@
                         <td class="row-count-column">@Model.RowCounter</td>
                         <td class="burial-table-columns">
 
-                            @item.SquareId
+                            @{ViewBag.TempSquare = Model.Squares.Where(x => item.SquareId == x.SquareId).FirstOrDefault();}
+                            @ViewBag.TempSquare.LowPairNs/@ViewBag.TempSquare.HighPairNs @ViewBag.TempSquare.BurialLocationNs
+                            @ViewBag.TempSquare.LowPairEw/@ViewBag.TempSquare.HighPairEw @ViewBag.TempSquare.BurialLocationEw
+
                         </td>
                         <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
                         <td class="burial-table-columns">@item.BurialNumber</td>

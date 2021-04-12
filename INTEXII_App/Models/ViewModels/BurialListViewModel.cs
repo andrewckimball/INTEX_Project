@@ -13,6 +13,7 @@ namespace INTEXII_App.Models.ViewModels
         public IEnumerable<Square> Squares { get; set; }
         public IEnumerable<Burial> Burials { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public Square TempSquare { get; set; }
         public int RowCounter { get; set; } = 1;
     }
 }
