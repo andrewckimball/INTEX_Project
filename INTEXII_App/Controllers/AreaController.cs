@@ -100,7 +100,9 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(area);
+                    //Updating areas
+                    _context.Areas.Where(e => e.AreaId == id).FirstOrDefault().Area1 = area.Area1;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
