@@ -20,6 +20,7 @@ namespace INTEXII_App.Models
         public string BurialLocationNs { get; set; }
         public string BurialLocationEw { get; set; }
 
+
         public virtual ICollection<Burial> Burials { get; set; }
     }
 }

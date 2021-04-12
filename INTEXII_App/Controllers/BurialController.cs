@@ -19,21 +19,28 @@ namespace INTEXII_App.Controllers
             _context = context;
         }
 
-        private int PageSize = 10;
+        // Number of records to display per page
+        private int PageSize = 50;
 
         //List<int> square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
 
         // GET: Burial
         public async Task<IActionResult> Index(string id, int page = 1)
         {
-
             var filters = new Filters(id);
             ViewBag.Filters = filters;
 
-            ViewBag.Square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
+            // Drop down options for filters
+            List<string> squareIds = new List<string>();
+
+            foreach (Square s in _context.Squares.Distinct().ToList())
+            {
+                string squareId = s.LowPairNs.ToString() + '/' + s.HighPairNs.ToString() + ' ' + s.BurialLocationNs.ToString() + ' ' + s.LowPairEw.ToString() + '/' + s.HighPairEw.ToString() + ' ' + s.BurialLocationEw.ToString();
+                squareIds.Add(squareId);
+            }
+
+            ViewBag.Square = _context.Squares.Distinct().ToList();
             ViewBag.Area = new List<string> {"NE", "NW", "SW", "SE" };
-            ViewBag.Length = _context.Burials.Select(p => p.Length).Distinct().ToList();
-            ViewBag.Depth = _context.Burials.Select(p => p.Depth).Distinct().ToList();
             ViewBag.PhotoTaken = new List<string> { "true", "false"};
             ViewBag.BurialGoods = new List<string> { "true", "false" };
             ViewBag.Sex = new List<string> { "U", "F", "M", "S" };
@@ -44,8 +51,6 @@ namespace INTEXII_App.Controllers
 
             BurialListViewModel burialListViewModel = new BurialListViewModel
             {
-                
-
                 Areas = _context.Areas,
                 Squares = _context.Squares,
                 Burials =  _context.Burials,
@@ -58,6 +63,7 @@ namespace INTEXII_App.Controllers
                 }
             };
 
+            // Filter context based on filters
             if (filters.HasSquare)
             {
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.SquareId == Convert.ToDecimal(filters.Square));
@@ -68,10 +74,26 @@ namespace INTEXII_App.Controllers
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.AreaId == burialListViewModel.Areas.Where(x => x.Area1 == filters.Area).FirstOrDefault().AreaId);
             }
 
-            if (filters.HasLength)
+            if (filters.HasMinLength)
             {
-                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Length == Convert.ToDecimal(filters.Length));
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Length >= Convert.ToDecimal(filters.MinLength));
             }
+
+            if (filters.HasMaxLength)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Length <= Convert.ToDecimal(filters.MaxLength));
+            }
+
+            if (filters.HasMinDepth)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Depth >= Convert.ToDecimal(filters.MinDepth));
+            }
+
+            if (filters.HasMaxDepth)
+            {
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.Depth <= Convert.ToDecimal(filters.MaxDepth));
+            }
+
             if (filters.HasPhotoTaken)
             {
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.PhotoTaken == Convert.ToBoolean(filters.PhotoTaken));
@@ -102,7 +124,7 @@ namespace INTEXII_App.Controllers
             }
             if (filters.HasEstimatedAge)
             {
-                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.EstimatedAge == filters.Square);
+                burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.EstimatedAge == filters.EstimatedAge);
             }
 
             burialListViewModel.Burials = burialListViewModel.Burials.Skip((page - 1) * PageSize).Take(PageSize);
@@ -114,8 +136,6 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         public IActionResult Filter(string[] filter)
         {
-            ViewBag.Area = _context.Areas.Select(p => p.AreaId).Distinct().ToList();
-
             string id = string.Join('-', filter);
             return RedirectToAction("Index", new { ID = id });
         }
