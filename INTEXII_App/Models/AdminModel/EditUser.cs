@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace INTEXII_App.Models.AdminModel
 {
+    //Edit user model to connect controller and EditUser view - contains all releveant information for users
     public class EditUser
     {
         public EditUser()
@@ -28,6 +29,7 @@ namespace INTEXII_App.Models.AdminModel
         [Required]
         public string LastName { get; set; }
 
+        //List of roles associated with the user
         public IList<string> Roles { get; set; }
     }
 }

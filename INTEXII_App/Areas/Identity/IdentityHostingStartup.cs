@@ -2,6 +2,7 @@
 using INTEXII_App.Areas.Identity.Data;
 using INTEXII_App.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,10 @@ namespace INTEXII_App.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //true if want email confirmation
+                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)  //true if want email confirmation
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
+
 
             });
         }

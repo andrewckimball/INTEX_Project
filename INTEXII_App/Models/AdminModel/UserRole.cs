@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace INTEXII_App.Models.AdminModel
 {
+    //UserRole model to connect all the users in each role
     public class UserRole
     {
         public string UserId { get; set; }

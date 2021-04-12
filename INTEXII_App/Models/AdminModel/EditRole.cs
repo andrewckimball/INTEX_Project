@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace INTEXII_App.Models.AdminModel
 {
+    //Edit role model - used in EditRole.cshtml view
     public class EditRole
     {
         public EditRole()  //initialize users collection property

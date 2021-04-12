@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace INTEXII_App.Data
 {
+    //AuthDbContext holds all data associated with the user accounts
     public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options)

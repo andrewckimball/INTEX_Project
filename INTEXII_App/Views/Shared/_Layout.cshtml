@@ -27,6 +27,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Database
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Burial"
+                                   asp-action="Index">Burials</a>
+                                <a class="dropdown-item" asp-controller="Artifact"
+                                   asp-action="Index">Burial Artifacts</a>
+                                <a class="dropdown-item" asp-controller="FieldBook"
+                                   asp-action="Index">Field Books</a>
+                                <a class="dropdown-item" asp-controller="Areas"
+                                   asp-action="Index">Burial Areas</a>
+                                <a class="dropdown-item" asp-controller="Square"
+                                   asp-action="Index">Burial Squares</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Images</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                        </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
