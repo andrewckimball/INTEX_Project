@@ -31,15 +31,15 @@ namespace INTEXII_App.Controllers
             ViewBag.Filters = filters;
 
             ViewBag.Square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
-            ViewBag.Area = _context.Areas.Select(p => p.Area1).Distinct().ToList();
+            ViewBag.Area = new List<string> {"NE", "NW", "SW", "SE" };
             ViewBag.Length = _context.Burials.Select(p => p.Length).Distinct().ToList();
             ViewBag.Depth = _context.Burials.Select(p => p.Depth).Distinct().ToList();
-            ViewBag.PhotoTaken = _context.Burials.Select(p => p.PhotoTaken).Distinct().ToList();
-            ViewBag.BurialGoods = _context.Burials.Select(p => p.BurialGoods).Distinct().ToList();
-            ViewBag.Sex = _context.Burials.Select(p => p.SexBody).Distinct().ToList();
-            ViewBag.HairColor = _context.Burials.Select(p => p.HairColor).Distinct().ToList();
-            ViewBag.FaceBundle = _context.Burials.Select(p => p.FaceBundle).Distinct().ToList();
-            ViewBag.HeadDirection = _context.Burials.Select(p => p.HeadDirection).Distinct().ToList();
+            ViewBag.PhotoTaken = new List<string> { "true", "false"};
+            ViewBag.BurialGoods = new List<string> { "true", "false" };
+            ViewBag.Sex = new List<string> { "U", "F", "M", "S" };
+            ViewBag.HairColor = new List<string> { "Blonde", "Red Brown", "Light Brown", "Brown", "Red", "Black", "Dark Brown"};
+            ViewBag.FaceBundle = new List<string> { "U", "Y" };
+            ViewBag.HeadDirection = new List<string> { "E", "I", "U", "W"};
             ViewBag.EstimatedAge = _context.Burials.Select(p => p.EstimatedAge).Distinct().ToList();
 
             BurialListViewModel burialListViewModel = new BurialListViewModel
@@ -106,7 +106,7 @@ namespace INTEXII_App.Controllers
             }
 
             burialListViewModel.Burials = burialListViewModel.Burials.Skip((page - 1) * PageSize).Take(PageSize);
-            return View(burialListViewModel);
+            return View("Index", burialListViewModel);
         }
 
 
