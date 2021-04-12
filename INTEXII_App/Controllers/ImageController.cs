@@ -155,5 +155,10 @@ namespace INTEXII_App.Controllers
         {
             return _context.Images.Any(e => e.ImageId == id);
         }
+
+        public IActionResult ViewImages()
+        {
+            return View();
+        }
     }
 }

@@ -1,54 +1,61 @@
 @model INTEXII_App.Models.Square
+@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
+<br />
+<h1>Square Details</h1>
+<br />
 <div>
-    <h4>Square</h4>
+    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+
+        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.SquareId">Edit Burial Details</a>
+        <br />
+        <br />
+    }
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LowPairNs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LowPairNs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HighPairNs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HighPairNs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LowPairEw)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LowPairEw)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HighPairEw)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HighPairEw)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialLocationNs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialLocationNs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BurialLocationEw)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BurialLocationEw)
-        </dd>
-    </dl>
+
+    <table class="table table-hover table-striped">
+        <th>Details</th>
+        <th></th>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LowPairNs)</td>
+            <td>@Html.DisplayFor(model => model.LowPairNs)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.HighPairNs)</td>
+            <td>@Html.DisplayFor(model => model.HighPairNs)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LowPairEw)</td>
+            <td>@Html.DisplayFor(model => model.LowPairEw)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.HighPairEw)</td>
+            <td>@Html.DisplayFor(model => model.HighPairEw)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.BurialLocationNs)</td>
+            <td>@Html.DisplayFor(model => model.BurialLocationNs)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.BurialLocationEw)</td>
+            <td>@Html.DisplayFor(model => model.BurialLocationEw)</td>
+
+        </tr>
+    </table>
+
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.SquareId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<a class="btn btn-primary"
+   style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+   asp-controller="Square"
+   asp-action="Index">Back to List</a>

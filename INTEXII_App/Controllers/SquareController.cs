@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -43,6 +44,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Square/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
