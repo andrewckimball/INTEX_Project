@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
 using INTEXII_App.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -195,6 +196,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Burial/Edit/5
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -217,6 +219,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal id, [Bind("BurialId,SquareId,AreaId,BurialNumber,SouthToHead,SouthToFeet,WestToHead,WestToFeet,Length,Depth,PhotoTaken,BurialGoods,DateFound,ClusterNumber,SampleNumber,Rack,Shelf,Bag,PreviouslySampled,SexBody,SexGiles,GeFunctionTotal,Description,BasilarSuture,VentralArc,SubPubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpramus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,DecimalerorbitalBreadth,HairColor,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimatedAge,AgeMethod,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,HeadDirection,Byusample,BodyAnalysisYear,SkullAtMagazine,PostcraniaAtMagazine,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribiaOrbitala,PoroticHyperotosis,PoroticHyperotosisLocations,MetopicSuture,ButtonOsteoma,OsteologyUnknownComment,TmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,BurialPreservation,BurialWrapping,BurialAdultChild,GenderCode,BurialGenderMethod,AgeCodeSingle,FaceBundle,DateOnSkull")] Burial burial)
         {
             if (id != burial.BurialId)

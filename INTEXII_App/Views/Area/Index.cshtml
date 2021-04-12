@@ -4,32 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@inject SignInManager<ApplicationUser> signInManager;
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Area1)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area1)
-            </td>
-            <td>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<divHeader>
+    <link href="~/DynamicTable/StyleSheet.css" rel="stylesheet" />
+</divHeader>
+
+<br />
+
+<div class="container">
+    <h2>Burial Areas</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">@Html.DisplayNameFor(model => model.Area1)</div>
+                <div class="col col-7"></div>
+
+        </li>
+        @foreach (var item in Model)
+        {
+    <li class="table-row">
+        <div class="col col-1" data-label="@Html.DisplayNameFor(model => model.Area1)">@Html.DisplayFor(modelItem => item.Area1)</div>
+
+        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+        {
+            <div class="col col-7" data-label="">
                 <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
-            </td>
-        </tr>
+            </div>
+        }
+        else
+        {
+            <a asp-action="Details" asp-route-id="@item.AreaId">Details</a>
+        }
+    </li>
+        }
+
+
+    </ul>
+</div>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Researcher"))
+{
+    <a class="btn btn-primary"
+       style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+       asp-controller="Area"
+       asp-action="Create">Add Record</a>
 }
-    </tbody>
-</table>

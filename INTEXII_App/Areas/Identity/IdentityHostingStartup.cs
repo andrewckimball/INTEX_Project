@@ -21,16 +21,20 @@ namespace INTEXII_App.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<ApplicationUser>(options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    //options.Password.RequiredLength = 10;   //Requiring passwords to be 10 characters, minimun
-                }) 
+
+                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //true if want email confirmation
                     .AddRoles<IdentityRole>()  
                     .AddEntityFrameworkStores<AuthDbContext>();
 
+                services.ConfigureApplicationCookie(options =>
+                {
+                    //options.LoginPath = new PathString("/[your-path]");
+                    options.AccessDeniedPath = new PathString("/Home/PermissionDenied");
+                    //options.LogoutPath = new PathString("/[your-path]");
+                });
 
             });
+
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -43,6 +44,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Square/Create
+        [Authorize(Roles = "Admin,Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +53,7 @@ namespace INTEXII_App.Controllers
         // POST: Square/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin,Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SquareId,LowPairNs,HighPairNs,LowPairEw,HighPairEw,BurialLocationNs,BurialLocationEw")] Square square)
@@ -65,6 +68,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Square/Edit/5
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace INTEXII_App.Controllers
         // POST: Square/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin,Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(decimal id, [Bind("SquareId,LowPairNs,HighPairNs,LowPairEw,HighPairEw,BurialLocationNs,BurialLocationEw")] Square square)
@@ -116,6 +121,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Square/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace INTEXII_App.Controllers
         }
 
         // POST: Square/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(decimal id)

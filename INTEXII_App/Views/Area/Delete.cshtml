@@ -4,10 +4,17 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Delete Area</h1>
 
 <h3>Are you sure you want to delete this?</h3>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="AreaId" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-success">No, Go Back</a>
+</form>
 <div>
+    <br />
+    <br />
     <h4>Area</h4>
     <hr />
     <dl class="row">
@@ -19,9 +26,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="AreaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
 </div>
+
+<a class="btn btn-primary"
+   style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
+   asp-controller="Area"
+   asp-action="Index">Back to List</a>

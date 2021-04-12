@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEXII_App.Controllers
 {
@@ -45,6 +46,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: BiologicalSample/Create
+        [Authorize(Roles = "Admin,Researcher")]
         public IActionResult Create()
         {
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
@@ -69,6 +71,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: BiologicalSample/Edit/5
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -90,6 +93,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal id, [Bind("BiologicalSampleId,BurialId,Description,SampleRack,SampleBag,PreviouslySampled,Initials")] BiologicalSample biologicalSample)
         {
             if (id != biologicalSample.BiologicalSampleId)
@@ -122,6 +126,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: BiologicalSample/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -143,6 +148,7 @@ namespace INTEXII_App.Controllers
         // POST: BiologicalSample/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
             var biologicalSample = await _context.BiologicalSamples.FindAsync(id);
