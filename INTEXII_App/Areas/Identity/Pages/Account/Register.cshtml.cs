@@ -109,13 +109,13 @@ namespace INTEXII_App.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        //adding this code 
+                        //If statement to allow the admin to enter a new user and not be logged in as him/her
                         if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             return RedirectToAction("ListUsers", "Administration");
                         }
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return LocalRedirect("~/Identity/Account/Manage/TwoFactorAuthentication"); //LocalRedirect(returnUrl)
                     }
                 }
                 foreach (var error in result.Errors)
