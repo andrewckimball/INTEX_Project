@@ -68,7 +68,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: FieldBook/Edit/5
-        [Authorize(Roles = "Admin,Researcher")]
+        //[Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null)
@@ -89,7 +89,7 @@ namespace INTEXII_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Researcher")]
+        //[Authorize(Roles = "Admin,Researcher")]
         public async Task<IActionResult> Edit(decimal id, [Bind("FieldBookId,Name,Description")] FieldBook fieldBook)
         {
             if (id != fieldBook.FieldBookId)
