@@ -4,6 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
+<!-- Vew to add a new biological sample -->
+
 <h1>Create</h1>
 
 <h4>BiologicalSample</h4>
@@ -14,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BurialId" class="control-label"></label>
-                <select asp-for="BurialId" class ="form-control" asp-items="ViewBag.BurialId"></select>
+                <select asp-for="BurialId" class="form-control" asp-items="ViewBag.BurialId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
