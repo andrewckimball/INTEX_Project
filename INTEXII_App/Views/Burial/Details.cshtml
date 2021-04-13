@@ -711,15 +711,20 @@
             <textarea rows="10" class="form-control" readonly="">@Html.DisplayFor(model => model.DetailBurial.Description)</textarea>
         </section>
         <section id="images" class="tab-panel">
-            <div class="container">
+
+            <a class="btn btn-primary" asp-controller="Image" asp-action="Create" asp-route-id="@Model.DetailBurial.BurialId">Upload Image</a><br>
+            <div class="container"><br />
 
                 <div class="row text-center text-lg-left">
 
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a href="https://fagel-gamous.s3.amazonaws.com/Burials/Screen+Shot+2021-04-13+at+12.11.00+PM+(2).png" class="d-block mb-4 h-100">
-                            <img class="img-fluid img-thumbnail" src="https://fagel-gamous.s3.amazonaws.com/Burials/Screen+Shot+2021-04-13+at+12.11.00+PM+(2).png">
-                        </a>
-                    </div>
+                    @foreach (Image x in Model.DetailBurial.Images)
+                    {
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <a href="@x.ImagePodecimaler" class="d-block mb-4 h-100">       
+                                <img class="img-fluid img-thumbnail" src="@x.ImagePodecimaler">
+                            </a>
+                        </div>
+                    }
 
                 </div>
 
@@ -738,7 +743,3 @@
    asp-action="Index">Back to List</a>
 
 
-@foreach (Image x in Model.DetailBurial.Images)
-{
-    <h1>@x.ImagePodecimaler;</h1>
-}

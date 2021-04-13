@@ -49,9 +49,10 @@ namespace INTEXII_App.Controllers
 
         // GET: Image/Create
         [Authorize(Roles = "Admin,Researcher")]
-        public IActionResult Create()
+        public IActionResult Create(decimal id)
         {
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
+            ViewBag.burialid = id;
+            //ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
             return View();
         }
 
@@ -64,7 +65,7 @@ namespace INTEXII_App.Controllers
         public async Task<IActionResult> Create(ImageUploadViewModel viewModel)
         {
 
-            string objectKey = $"Burials/{viewModel.fileForm.FileName}";
+            string objectKey = $"Burials/{viewModel.fileForm.FileName}-{DateTime.Now.ToString()}";
 
 
             Image img = new Image
@@ -97,8 +98,8 @@ namespace INTEXII_App.Controllers
             }
 
 
-
-            return View();
+            ViewBag.burialid = viewModel.BurialId;
+            return RedirectToAction("Details", "Burial");
 
 
         }
