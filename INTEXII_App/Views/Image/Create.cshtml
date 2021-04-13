@@ -1,4 +1,4 @@
-@model INTEXII_App.Models.Image
+@model ImageUploadViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,20 +10,32 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-controller="Image" asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BurialId" class="control-label"></label>
-                <select asp-for="BurialId" class ="form-control" asp-items="ViewBag.BurialId"></select>
+                <select asp-for="BurialId" class="form-control" asp-items="ViewBag.BurialId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="ImagePodecimaler" class="control-label"></label>
                 <input asp-for="ImagePodecimaler" class="form-control" />
                 <span asp-validation-for="ImagePodecimaler" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            </div>-->
+
+            <!--File upload input-->
+            <dl>
+                <dt>
+                    <label asp-for="fileForm"></label>
+                </dt>
+                <dd>
+                    <input asp-for="fileForm" type="file">
+                </dd>
+            </dl>
+            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload">
+
         </form>
     </div>
 </div>
@@ -35,3 +47,24 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+
+
+
+<!--<form enctype="multipart/form-data" method="post">-->
+    @*    <div class="form-group">
+            <label asp-for="BurialId" class="control-label"></label>
+            <input asp-for="BurialId" class="form-control" />
+            <span asp-validation-for="BurialId" class="text-danger"></span>
+        </div>*@
+    <!--<dl>
+        <dt>
+            <label asp-for="FormFile"></label>
+        </dt>
+        <dd>
+            <input asp-for="FormFile" type="file">
+        </dd>
+    </dl>
+    <input asp-page-handler="Upload" class="btn" type="submit" value="Upload">
+</form>-->

@@ -29,11 +29,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Rsk.AspNetCore.Fido" Version="1.2.0" />
     <PackageReference Include="Rsk.AspNetCore.Fido.EntityFramework" Version="1.2.0" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.0.12" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\css\Burial\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
 
