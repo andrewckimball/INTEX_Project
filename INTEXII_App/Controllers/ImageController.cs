@@ -86,7 +86,7 @@ namespace INTEXII_App.Controllers
             {
                 await viewModel.fileForm.CopyToAsync(memoryStream);
                 // Upload the file if less than 2 MB
-                if (memoryStream.Length < 2097152)
+                if (memoryStream.Length < 10485760)
                 {
                     await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", objectKey);
                 }
