@@ -97,9 +97,7 @@ namespace INTEXII_App.Controllers
                 }
             }
 
-
-            ViewBag.burialid = viewModel.BurialId;
-            return RedirectToAction("Details", "Burial");
+            return RedirectToAction("Details", "Burial", new { ID = viewModel.BurialId });
 
 
         }
