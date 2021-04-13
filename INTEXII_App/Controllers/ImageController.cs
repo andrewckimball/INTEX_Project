@@ -85,7 +85,7 @@ namespace INTEXII_App.Controllers
                 // Upload the file if less than 2 MB
                 if (memoryStream.Length < 2097152)
                 {
-                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", "AKIAXUILLHEYJSM5ZSX7");
+                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/elgamous", "IRm/sTEOnbGOFoL6vjTOj2+0n1/S0ZvmvxiihZcw");
                 }
                 else
                 {
