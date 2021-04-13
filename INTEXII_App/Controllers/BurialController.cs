@@ -170,6 +170,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Burial/Create
+        [Authorize(Roles = "Admin,Researcher")]
         public IActionResult Create()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "Area1");
@@ -253,6 +254,7 @@ namespace INTEXII_App.Controllers
         }
 
         // GET: Burial/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(decimal? id)
         {
             if (id == null)
@@ -275,6 +277,7 @@ namespace INTEXII_App.Controllers
         // POST: Burial/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
             var burial = await _context.Burials.FindAsync(id);

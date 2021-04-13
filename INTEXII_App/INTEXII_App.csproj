@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\Burial\" />
     <Folder Include="Infrastructure\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 </Project>
 
