@@ -32,12 +32,15 @@
 
                 <!--File upload input-->
                 <div>
-                    <img src="" id="img_url" alt="None Selected">
+                    <img src="" id="img_url" alt="Not Selected">
                     <p>
                         <label asp-for="fileForm" hidden></label>
                     </p>
                     <p>
-                        <input id="img_file" asp-for="fileForm" type="file" onChange="img_pathUrl(this);" style="width: 85px;">
+
+                        <input id="img_file" asp-for="fileForm" type="file" onChange="img_pathUrl(this); namethis()" style="width: 85px;" accept=".png, .jpg, .pdf">
+
+
                     </p>
                 </div>
                 <input asp-page-handler="Upload" class="btn btn-success" type="submit" value="Upload">
@@ -58,4 +61,5 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/UploadImage/Validation.js"></script>
 <script src="~/UploadImage/JavaScript.js"></script>
