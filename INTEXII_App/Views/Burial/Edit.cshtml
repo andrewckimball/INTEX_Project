@@ -4,6 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
+<!-- View to edit a burial -->
+
 <divHeader>
 
     <link href="~/DetailPage/TabsStyles.css" rel="stylesheet" />
@@ -42,7 +44,7 @@
                 <h2>General Info</h2>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="BurialId" />
-                
+
                 <div class="form-group">
                     <label asp-for="SquareId" class="control-label"></label>
                     <select asp-for="SquareId" class="form-control" asp-items="ViewBag.SquareId"></select>
@@ -571,8 +573,8 @@
                 </div>
 
             </section>
-        
-        
+
+
         </div>
 
     </div>
@@ -587,7 +589,7 @@
 "
    asp-controller="Burial"
    asp-action="Index">Back to List</a>
-    
+
 
 
 @section Scripts {
