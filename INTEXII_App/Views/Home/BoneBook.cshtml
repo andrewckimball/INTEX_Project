@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "BoneBook";
+}
+
+<divHeader>
+    <link href="~/DynamicTable/StyleSheet.css" rel="stylesheet" />
+</divHeader>
+
+<br />
+
+<div class="container">
+    <h2>Bone Books</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Name</div>
+            <div class="col col-7">Link</div>
+
+        </li>
+
+        <li class="table-row">
+            <div class="col col-1">2000 Bone Book</div>
+            <div class="col col-2"><a href="https://fagel-gamous.s3.amazonaws.com/BoneBook/2000+Bone+Book.pdf" target="_blank">View</a></div>
+        </li>
+        <li class="table-row">
+            <div class="col col-1">2002 Bone Book</div>
+            <div class="col col-2"><a href="https://fagel-gamous.s3.amazonaws.com/BoneBook/2002+Bone+Book.pdf" target="_blank">View</a></div>
+        </li>
+        <li class="table-row">
+            <div class="col col-1">2012 Bone Book</div>
+            <div class="col col-2"><a href="https://fagel-gamous.s3.amazonaws.com/BoneBook/2012+Bone+Book.pdf" target="_blank">View</a></div>
+        </li>
+        <li class="table-row">
+            <div class="col col-1">2013 Bone Book</div>
+            <div class="col col-2"><a href="https://fagel-gamous.s3.amazonaws.com/BoneBook/2013+Bone+Book.pdf" target="_blank">View</a></div>
+        </li>
+        <li class="table-row">
+            <div class="col col-1">2014 Bone Book</div>
+            <div class="col col-2"><a href="https://fagel-gamous.s3.amazonaws.com/BoneBook/2014+Bone+Book.pdf" target="_blank">View</a></div>
+        </li>
+
+    </ul>
+</div>
+
+    <a class="btn btn-primary"
+       style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;" asp-action="NewS3">Add Record</a>

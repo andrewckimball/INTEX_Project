@@ -43,5 +43,15 @@ namespace INTEXII_App.Controllers
         {
             return View();
         }
+
+        public IActionResult BoneBook()
+        {
+            return View();
+        }
+
+        public IActionResult NewS3()
+        {
+            return View();
+        }
     }
 }
