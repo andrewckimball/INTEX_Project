@@ -21,12 +21,12 @@ namespace INTEXII_App.Controllers
             _context = context;
         }
 
-        //// GET: Image
-        //public async Task<IActionResult> Index()
-        //{
-        //    var bYU_ExcavationContext = _context.Images.Include(i => i.Burial);
-        //    return View(await bYU_ExcavationContext.ToListAsync());
-        //}
+        // GET: Image
+        public async Task<IActionResult> Index()
+        {
+            var bYU_ExcavationContext = _context.Images.Include(i => i.Burial);
+            return View(await bYU_ExcavationContext.ToListAsync());
+        }
 
         // GET: Image/Details/5
         public async Task<IActionResult> Details(decimal? id)
@@ -64,10 +64,13 @@ namespace INTEXII_App.Controllers
         public async Task<IActionResult> Create(ImageUploadViewModel viewModel)
         {
 
+            string objectKey = $"Burials/{viewModel.fileForm.FileName}";
+
+
             Image img = new Image
             {
                 BurialId = Convert.ToDecimal(viewModel.BurialId),
-                ImagePodecimaler = viewModel.ImagePodecimaler,
+                ImagePodecimaler = S3Upload.GeneratePreSignedURL(objectKey),
                 Burial = _context.Burials.Where(x => x.BurialId == Convert.ToDecimal(viewModel.BurialId)).FirstOrDefault()
             };
 
@@ -85,13 +88,15 @@ namespace INTEXII_App.Controllers
                 // Upload the file if less than 2 MB
                 if (memoryStream.Length < 2097152)
                 {
-                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/elgamous", "IRm/sTEOnbGOFoL6vjTOj2+0n1/S0ZvmvxiihZcw");
+                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", objectKey);
                 }
                 else
                 {
                     ModelState.AddModelError("File", "The file is too large.");
                 }
             }
+
+
 
             return View();
 

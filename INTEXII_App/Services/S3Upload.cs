@@ -27,5 +27,22 @@ namespace INTEXII_App //adding the data class got rid of the .models
             };
             await s3Client.PutACLAsync(request);
         }
+
+        public static string GeneratePreSignedURL(string objectKey)
+        {
+
+            s3Client = new AmazonS3Client(bucketRegion);
+
+            var request = new GetPreSignedUrlRequest
+            {
+                BucketName = "arn:aws:s3:us-east-1:524546685232:accesspoint/is410",
+                Key = objectKey,
+                Verb = HttpVerb.GET,
+                Expires = DateTime.UtcNow.AddHours(24)
+            };
+
+            string url = s3Client.GetPreSignedURL(request);
+            return url;
+        }
     }
 }
