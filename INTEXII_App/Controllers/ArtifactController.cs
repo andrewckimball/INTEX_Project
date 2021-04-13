@@ -105,7 +105,10 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(artifact);
+                    _context.Artifacts.Where(e => e.ArtifactId == id).FirstOrDefault().Description = artifact.Description;
+                    //_context.Artifacts.Where(e => e.ArtifactId == id).FirstOrDefault().Description = artifact.;
+
+                    //_context.Update(artifact);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

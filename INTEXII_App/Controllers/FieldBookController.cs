@@ -101,7 +101,12 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(fieldBook);
+                    //Updating the name and description
+                    _context.FieldBooks.Where(e => e.FieldBookId == id).FirstOrDefault().Name = fieldBook.Name;
+                    _context.FieldBooks.Where(e => e.FieldBookId == id).FirstOrDefault().Description = fieldBook.Description;
+
+                    //_context.Update(fieldBook); ///this didnt work...
+                    //_context.SaveChanges();
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

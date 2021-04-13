@@ -101,7 +101,15 @@ namespace INTEXII_App.Controllers
             {
                 try
                 {
-                    _context.Update(square);
+                    //Updating the square
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().LowPairNs = square.LowPairNs;
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().HighPairNs = square.HighPairNs;
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().LowPairEw = square.LowPairEw;
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().HighPairEw = square.HighPairEw;
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().BurialLocationNs = square.BurialLocationNs;
+                    _context.Squares.Where(e => e.SquareId == id).FirstOrDefault().BurialLocationEw = square.BurialLocationEw;
+
+                    //_context.Update(square);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
