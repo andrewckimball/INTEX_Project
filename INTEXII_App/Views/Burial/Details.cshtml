@@ -43,7 +43,7 @@
             @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
             {
 
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a><br>
                 <br />
                 <br />
             }
@@ -699,3 +699,12 @@
    style="position: fixed; right: 2rem; bottom: 2rem; z-index: 100;"
    asp-controller="Burial"
    asp-action="Index">Back to List</a>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+
+    
+    <a class="text-danger" asp-action="Delete" asp-route-id="@Model.DetailBurial.BurialId">Delete Burial</a>
+    <br />
+    <br />
+}
