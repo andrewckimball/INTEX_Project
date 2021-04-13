@@ -36,15 +36,9 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
 
-            var image = await _context.Images
-                .Include(i => i.Burial)
-                .FirstOrDefaultAsync(m => m.ImageId == id);
-            if (image == null)
-            {
-                return NotFound();
-            }
 
-            return View(image);
+
+            return RedirectToAction("Details", "Burial", new { ID = id });
         }
 
         // GET: Image/Create

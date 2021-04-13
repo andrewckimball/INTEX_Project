@@ -4,38 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePodecimaler)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagePodecimaler)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+
+    <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Excavation Images</h1>
+
+    <hr class="mt-2 mb-5">
+
+    <div class="row text-center text-lg-left">
+
+        @foreach (Image x in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-6">
+                <a asp-action="Details" asp-route-id="@x.BurialId" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="@Html.DisplayFor(modelItem => x.ImagePodecimaler)" alt="">
+                </a>
+            </div>
+        }
+
+    </div>
+
+</div>
