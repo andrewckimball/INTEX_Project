@@ -57,8 +57,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Image" asp-action="ViewImages">Images</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Analytics
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Home"
+                                   asp-action="Dashboard">Dashboard</a>
+                                <a class="dropdown-item" asp-controller="Home"
+                                   asp-action="Map">Map</a>
+
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using INTEXII_App.Models.ViewModels;
 
 namespace INTEXII_App.Controllers
 {
@@ -59,16 +61,46 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Researcher")]
-        public async Task<IActionResult> Create([Bind("ImageId,BurialId,ImagePodecimaler")] Image image)
+        public async Task<IActionResult> Create(ImageUploadViewModel viewModel)
         {
+
+            string objectKey = $"Burials/{viewModel.fileForm.FileName}";
+
+
+            Image img = new Image
+            {
+                BurialId = Convert.ToDecimal(viewModel.BurialId),
+                ImagePodecimaler = S3Upload.GeneratePreSignedURL(objectKey),
+                Burial = _context.Burials.Where(x => x.BurialId == Convert.ToDecimal(viewModel.BurialId)).FirstOrDefault()
+            };
+
             if (ModelState.IsValid)
             {
-                _context.Add(image);
+                _context.Add(img);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", image.BurialId);
-            return View(image);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", img.BurialId);
+            
+            using (var memoryStream = new MemoryStream())
+            {
+                await viewModel.fileForm.CopyToAsync(memoryStream);
+                // Upload the file if less than 2 MB
+                if (memoryStream.Length < 10485760)
+                {
+                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", objectKey);
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "The file is too large.");
+                }
+            }
+
+
+
+            return View();
+
+
         }
 
         // GET: Image/Edit/5

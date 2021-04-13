@@ -5,6 +5,10 @@
 @{
     ViewData["Title"] = "Details";
 }
+
+<!-- View details not available on the index page -->
+<!-- Split into four tabs with API analytics on several of the tabs -->
+
 <divHeader>
 
     <link href="~/DetailPage/TabsStyles.css" rel="stylesheet" />
@@ -34,8 +38,12 @@
     <!-- Tab 5 -->
     <input type="radio" name="tabset" id="tab5" aria-controls="notes">
     <label for="tab5">Notes</label>
+    <!-- Tab 6 -->
+    <input type="radio" name="tabset" id="tab6" aria-controls="images">
+    <label for="tab6">Images</label>
 
     <div class="tab-panels">
+        <!-- General section in tabs -->
         <section id="General" class="tab-panel">
             <h2>General</h2>
             <br />
@@ -44,6 +52,8 @@
             {
 
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a><br>
+                <br />
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.DetailBurial.BurialId">Delete Burial</a>
                 <br />
                 <br />
             }
@@ -181,9 +191,11 @@
 
 
         </section>
+        <!-- Body Bone tab-->
         <section id="BodyBone" class="tab-panel">
             <h2>Body Bone Info</h2>
             <br />
+            <!-- Sex type api graph -->
             @{ double Male = Model.Burials.Where(x => x.SexBody == "Male").Count();
                 double Female = Model.Burials.Where(x => x.SexBody == "Female").Count();
                 double Other = Model.Burials.Where(x => x.SexBody != null).Count();
@@ -193,6 +205,7 @@
                 <img src="@SexURL" />
             }
 
+            <!-- MNB API for graph api -->
             @{ decimal? MNBmin = Model.Burials.Min(x => x.MaximumNasalBreadth);
                 decimal? MNBmax = Model.Burials.Max(x => x.MaximumNasalBreadth);
                 decimal? MNBavg = @Model.Burials.Average(x => x.MaximumNasalBreadth);
@@ -204,6 +217,7 @@
                 <img src="@MNBurl" />
             }
 
+            <!-- PB API for graph api -->
             @{ decimal? PBmin = Model.Burials.Min(x => x.ParietalBossing);
                 decimal? PBmax = Model.Burials.Max(x => x.ParietalBossing);
                 decimal? PBavg = @Model.Burials.Average(x => x.ParietalBossing);
@@ -395,11 +409,12 @@
 
 
         </section>
+        <!-- Cranial tab section -->
         <section id="Cranial" class="tab-panel">
             <h2>Cranial Info</h2>
             <br />
 
-
+            <!-- SkullMT API for graph api -->
             @{ double SkullMT = Model.Burials.Where(x => x.SkullAtMagazine == true).Count();
                 double SkullMF = Model.Burials.Where(x => x.SkullAtMagazine == false).Count();
                 double SkullMO = Model.Burials.Where(x => x.SkullAtMagazine != null).Count();
@@ -409,6 +424,7 @@
                 <img src="@SkullURL" />
             }
 
+            <!-- BBH API for graph api -->
             @{ decimal? BBHmin = Model.Burials.Min(x => x.BasionBregmaHeight);
                 decimal? BBHmax = Model.Burials.Max(x => x.BasionBregmaHeight);
                 decimal? BBHavg = @Model.Burials.Average(x => x.BasionBregmaHeight);
@@ -420,6 +436,7 @@
                 <img src="@BBHurl" />
             }
 
+            <!-- MCL API for graph api -->
             @{ decimal? MCLmin = Model.Burials.Min(x => x.MaximumCranialLength);
                 decimal? MCLmax = Model.Burials.Max(x => x.MaximumCranialLength);
                 decimal? MCLavg = @Model.Burials.Average(x => x.MaximumCranialLength);
@@ -522,11 +539,13 @@
 
 
         </section>
+        <!-- Misc tab section -->
         <section id="misc" class="tab-panel">
             <h2>Miscellaneous Info</h2>
 
             <br />
 
+            <!-- hair API for graph api -->
             @{ double HairBrown = Model.Burials.Where(x => x.HairColor.ToUpper().Contains("BROWN")).Count();
                 double HairBlonde = Model.Burials.Where(x => x.HairColor.ToUpper().Contains("BLONDE")).Count();
                 double HairTotal = Model.Burials.Where(x => x.HairColor != null).Count();
@@ -536,6 +555,7 @@
                 <img src="@HairURL" />
             }
 
+            <!-- burial wrapping API for graph api -->
             @{ double BWh = Model.Burials.Where(x => x.BurialWrapping.ToUpper().Contains("H")).Count();
                 double BWu = Model.Burials.Where(x => x.BurialWrapping.ToUpper().Contains("U")).Count();
                 double BWw = Model.Burials.Where(x => x.BurialWrapping.ToUpper().Contains("W")).Count();
@@ -550,6 +570,7 @@
                 <img src="@WrappingURL" />
             }
 
+            <!-- ESL API for graph api -->
             @{ decimal? ESLmin = Model.Burials.Min(x => x.EstimateLivingStature);
                 decimal? ESLmax = Model.Burials.Max(x => x.EstimateLivingStature);
                 decimal? ESLavg = @Model.Burials.Average(x => x.EstimateLivingStature);
@@ -689,7 +710,23 @@
             <h2>Notes</h2>
             <textarea rows="10" class="form-control" readonly="">@Html.DisplayFor(model => model.DetailBurial.Description)</textarea>
         </section>
-    
+        <section id="images" class="tab-panel">
+            <div class="container">
+
+                <div class="row text-center text-lg-left">
+
+                    <div class="col-lg-3 col-md-4 col-6">
+                        <a href="https://fagel-gamous.s3.amazonaws.com/Burials/Screen+Shot+2021-04-13+at+12.11.00+PM+(2).png" class="d-block mb-4 h-100">
+                            <img class="img-fluid img-thumbnail" src="https://fagel-gamous.s3.amazonaws.com/Burials/Screen+Shot+2021-04-13+at+12.11.00+PM+(2).png">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </div>
 
 </div>
@@ -700,11 +737,8 @@
    asp-controller="Burial"
    asp-action="Index">Back to List</a>
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
 
-    
-    <a class="text-danger" asp-action="Delete" asp-route-id="@Model.DetailBurial.BurialId">Delete Burial</a>
-    <br />
-    <br />
+@foreach (Image x in Model.DetailBurial.Images)
+{
+    <h1>@x.ImagePodecimaler;</h1>
 }

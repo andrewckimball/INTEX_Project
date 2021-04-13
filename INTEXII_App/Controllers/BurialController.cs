@@ -158,6 +158,7 @@ namespace INTEXII_App.Controllers
             var burial = await _context.Burials
                 .Include(b => b.Area)
                 .Include(b => b.Square)
+                .Include(b => b.Images)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
             if (burial == null)
             {
