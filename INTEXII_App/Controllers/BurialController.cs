@@ -22,8 +22,8 @@ namespace INTEXII_App.Controllers
 
         // Number of records to display per page
         private int PageSize = 50;
+        private string stringId { get; set; }
 
-        //List<int> square = _context.Squares.Select(p => p.SquareId).Distinct().ToList();
 
         // GET: Burial
         public async Task<IActionResult> Index(string id, int page = 1)
@@ -54,12 +54,13 @@ namespace INTEXII_App.Controllers
             {
                 Areas = _context.Areas,
                 Squares = _context.Squares,
-                Burials =  _context.Burials,
+                Burials = _context.Burials,
+                Filters = filters,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalNumItems = _context.Burials.Count()
+                    TotalNumItems = 0
                     //TotalNumItems = category == null ? _context.Burials.Count() : _context.Burials.Where(x => x.Type == category).Count()/
                 }
             };
@@ -128,6 +129,7 @@ namespace INTEXII_App.Controllers
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.EstimatedAge == filters.EstimatedAge);
             }
 
+            burialListViewModel.PagingInfo.TotalNumItems = burialListViewModel.Burials.Count();
             burialListViewModel.Burials = burialListViewModel.Burials.Skip((page - 1) * PageSize).Take(PageSize);
             return View("Index", burialListViewModel);
         }
@@ -135,9 +137,10 @@ namespace INTEXII_App.Controllers
 
         // Filter
         [HttpPost]
-        public IActionResult Filter(string[] filter)
+        public IActionResult Filter(string[] filter, int page)
         {
             string id = string.Join('-', filter);
+            ViewBag.Page = page;
             return RedirectToAction("Index", new { ID = id });
         }
 

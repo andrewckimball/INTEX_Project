@@ -14,6 +14,7 @@ namespace INTEXII_App.Models.ViewModels
         public IEnumerable<Burial> Burials { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public Square TempSquare { get; set; }
+        public Filters Filters { get; set; }
         public int RowCounter { get; set; } = 1;
     }
 }
