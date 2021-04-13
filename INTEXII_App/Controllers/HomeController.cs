@@ -38,5 +38,10 @@ namespace INTEXII_App.Controllers
         {
             return View();
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

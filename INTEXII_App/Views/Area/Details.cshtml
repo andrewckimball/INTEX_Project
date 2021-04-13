@@ -9,7 +9,7 @@
 <h1> Area Details</h1>
 <br />
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Researcher")))
 {
 
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.AreaId">Edit Area Details</a>

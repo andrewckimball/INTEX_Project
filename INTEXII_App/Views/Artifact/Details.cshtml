@@ -8,7 +8,7 @@
 <h1>Artifact Details</h1>
 <br />
 <div>
-    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Researcher")))
     {
 
         <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.ArtifactId">Edit Artifact Details</a>

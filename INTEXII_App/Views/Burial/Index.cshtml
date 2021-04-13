@@ -12,7 +12,7 @@
 
 
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Researcher")))
 {
     <a class="btn btn-primary"
    style="position: fixed; right: 2rem; bottom: 5rem; z-index: 100;"

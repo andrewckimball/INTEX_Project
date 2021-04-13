@@ -40,7 +40,7 @@
             <h2>General</h2>
             <br />
 
-            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Researcher")))
             {
 
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.DetailBurial.BurialId">Edit Burial Details</a><br>
