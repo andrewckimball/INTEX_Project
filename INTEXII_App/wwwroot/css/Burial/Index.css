@@ -30,7 +30,7 @@
 .filters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: ceter;
+    justify-content: center;
 }
 
 .filter {
