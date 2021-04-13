@@ -59,17 +59,18 @@ namespace INTEXII_App.Infrastructure
                     if (PageClassesEnabled)
                     {
                         tag.AddCssClass(PageClass);
+                        tag.AddCssClass("paginationBtn");
                         tag.AddCssClass(1 == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                     }
 
                     tag.InnerHtml.Append(1.ToString());
 
                     result.InnerHtml.AppendHtml(tag);
-                    result.InnerHtml.AppendHtml(" ... ");
+                    result.InnerHtml.AppendHtml(" << ");
                 }
             }
             
-
+            // Determine start and end pages
             int starti = PageModel.CurrentPage > 1 ? PageModel.CurrentPage - 1 : 1;
             int endi = PageModel.CurrentPage < PageModel.TotalPages - 1 ? PageModel.CurrentPage + 1 : PageModel.TotalPages;
             endi = PageModel.CurrentPage == 1 ? 3 : endi;
@@ -92,6 +93,7 @@ namespace INTEXII_App.Infrastructure
                 if (PageClassesEnabled)
                 {
                     tag.AddCssClass(PageClass);
+                    tag.AddCssClass("paginationBtn");
                     tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
 
@@ -112,12 +114,13 @@ namespace INTEXII_App.Infrastructure
                     if (PageClassesEnabled)
                     {
                         tag.AddCssClass(PageClass);
+                        tag.AddCssClass("paginationBtn");
                         tag.AddCssClass(PageModel.TotalPages == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                     }
 
                     tag.InnerHtml.Append(PageModel.TotalPages.ToString());
 
-                    result.InnerHtml.AppendHtml(" ... ");
+                    result.InnerHtml.AppendHtml(" >> ");
                     result.InnerHtml.AppendHtml(tag); 
                 }
             }
