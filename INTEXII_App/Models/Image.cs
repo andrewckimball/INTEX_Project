@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
 
 #nullable disable
 
@@ -12,5 +15,6 @@ namespace INTEXII_App.Models
         public string ImagePodecimaler { get; set; }
 
         public virtual Burial Burial { get; set; }
+
     }
 }

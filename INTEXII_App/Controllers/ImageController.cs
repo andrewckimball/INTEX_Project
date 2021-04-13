@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEXII_App.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using INTEXII_App.Models.ViewModels;
 
 namespace INTEXII_App.Controllers
 {
@@ -19,12 +21,12 @@ namespace INTEXII_App.Controllers
             _context = context;
         }
 
-        // GET: Image
-        public async Task<IActionResult> Index()
-        {
-            var bYU_ExcavationContext = _context.Images.Include(i => i.Burial);
-            return View(await bYU_ExcavationContext.ToListAsync());
-        }
+        //// GET: Image
+        //public async Task<IActionResult> Index()
+        //{
+        //    var bYU_ExcavationContext = _context.Images.Include(i => i.Burial);
+        //    return View(await bYU_ExcavationContext.ToListAsync());
+        //}
 
         // GET: Image/Details/5
         public async Task<IActionResult> Details(decimal? id)
@@ -59,16 +61,41 @@ namespace INTEXII_App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Researcher")]
-        public async Task<IActionResult> Create([Bind("ImageId,BurialId,ImagePodecimaler")] Image image)
+        public async Task<IActionResult> Create(ImageUploadViewModel viewModel)
         {
+
+            Image img = new Image
+            {
+                BurialId = Convert.ToDecimal(viewModel.BurialId),
+                ImagePodecimaler = viewModel.ImagePodecimaler,
+                Burial = _context.Burials.Where(x => x.BurialId == Convert.ToDecimal(viewModel.BurialId)).FirstOrDefault()
+            };
+
             if (ModelState.IsValid)
             {
-                _context.Add(image);
+                _context.Add(img);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", image.BurialId);
-            return View(image);
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", img.BurialId);
+            
+            using (var memoryStream = new MemoryStream())
+            {
+                await viewModel.fileForm.CopyToAsync(memoryStream);
+                // Upload the file if less than 2 MB
+                if (memoryStream.Length < 2097152)
+                {
+                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", "AKIAXUILLHEYJSM5ZSX7");
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "The file is too large.");
+                }
+            }
+
+            return View();
+
+
         }
 
         // GET: Image/Edit/5
