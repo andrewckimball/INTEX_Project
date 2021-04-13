@@ -150,6 +150,12 @@ namespace INTEXII_App.Controllers
         // GET: Burial/Details/5
         public async Task<IActionResult> Details(decimal? id)
         {
+
+            if(ViewBag.burialid != null)
+            {
+                id = Convert.ToDecimal(ViewBag.burialid);
+            }
+
             if (id == null)
             {
                 return NotFound();
