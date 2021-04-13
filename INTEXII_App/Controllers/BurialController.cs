@@ -61,7 +61,6 @@ namespace INTEXII_App.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalNumItems = 0
-                    //TotalNumItems = category == null ? _context.Burials.Count() : _context.Burials.Where(x => x.Type == category).Count()/
                 }
             };
 
@@ -129,6 +128,7 @@ namespace INTEXII_App.Controllers
                 burialListViewModel.Burials = burialListViewModel.Burials.Where(t => t.EstimatedAge == filters.EstimatedAge);
             }
 
+            // Find total num items and return number PageSize
             burialListViewModel.PagingInfo.TotalNumItems = burialListViewModel.Burials.Count();
             burialListViewModel.Burials = burialListViewModel.Burials.Skip((page - 1) * PageSize).Take(PageSize);
             return View("Index", burialListViewModel);
@@ -150,6 +150,7 @@ namespace INTEXII_App.Controllers
         // GET: Burial/Details/5
         public async Task<IActionResult> Details(decimal? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -158,6 +159,7 @@ namespace INTEXII_App.Controllers
             var burial = await _context.Burials
                 .Include(b => b.Area)
                 .Include(b => b.Square)
+                .Include(b => b.Images)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
             if (burial == null)
             {

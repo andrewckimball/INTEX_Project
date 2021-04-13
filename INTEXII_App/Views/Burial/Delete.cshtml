@@ -4,6 +4,8 @@
     ViewData["Title"] = "Delete";
 }
 
+<!-- View to delete a burial, restricted by role -->
+
 <divHeader>
 
     <link href="~/DetailPage/TabsStyles.css" rel="stylesheet" />
@@ -15,8 +17,8 @@
 <h3>Are you sure you want to delete this?</h3>
 <form asp-action="Delete">
     <input type="hidden" asp-for="BurialId" />
-    <input type="submit" value="Delete" class="btn btn-danger" /> 
-    <a asp-action="Index"class="btn btn-success">No, Go Back</a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-success">No, Go Back</a>
 </form>
 <br />
 <br />
