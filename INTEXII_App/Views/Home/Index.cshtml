@@ -19,6 +19,11 @@
 </divHead>
 
 <divBody>
+    <style>
+        .container {
+            max-width: 1600px;
+        }
+    </style>
     <!-- Masthead-->
     <header class="masthead">
         <div class="container d-flex h-100 align-items-center">
@@ -36,8 +41,8 @@
                 <div class="col-lg-8 mx-auto">
                     <h2 class="text-white mb-4">Info on the Cemetary</h2>
                     <p class="text-white-50">
-                        Fag el-Gamous (which means Way of the Water Buffalo) is a large and important cemetery in Egypt that has been under archeological 
-                        investigation (primarily by BYU researchers) for over 25 years. The excavation has garnered international attention because of the 
+                        Fag el-Gamous (which means Way of the Water Buffalo) is a large and important cemetery in Egypt that has been under archeological
+                        investigation (primarily by BYU researchers) for over 25 years. The excavation has garnered international attention because of the
                         interesting insights gained by studying the Fag el-Gamous mummies.
                     </p>
                 </div>
@@ -51,11 +56,11 @@
             <!-- Featured Project Row-->
             <div class="row align-items-center no-gutters mb-4 mb-lg-5">
                 <div class="col-xl-1"></div>
-                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="~/HomePage/assets/img/dunes.jpg" alt="" style="width: 800px;"/></div>
+                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="~/HomePage/assets/img/dunes.jpg" alt="" style="width: 800px;" /></div>
                 <div class="col-xl-2 col-lg-5">
                     <div class="featured-text text-center text-lg-left">
-                        <h4>Shoreline</h4>
-                        <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+                        <h4>Explore</h4>
+                        <p class="text-black-50 mb-0">Thousands of records are open to be explored on this website! Checkout the database to see what you can discover.</p>
                     </div>
                 </div>
             </div>
@@ -66,8 +71,8 @@
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Misty</h4>
-                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                                <h4 class="text-white">A Rich History</h4>
+                                <p class="mb-0 text-white-50">Over the years that the school has been excavating, BYU has uncovered Mummies and Artifacts that date back thousands of years.</p>
                                 <hr class="d-none d-lg-block mb-0 ml-0" />
                             </div>
                         </div>
@@ -81,8 +86,8 @@
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-white">Mountains</h4>
-                                <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                                <h4 class="text-white">Still in Progress</h4>
+                                <p class="mb-0 text-white-50">Even though much has been discovered, the excavations are still ongoing! Not to mention, the data accesible here can help researchers across the world.</p>
                                 <hr class="d-none d-lg-block mb-0 mr-0" />
                             </div>
                         </div>
@@ -91,10 +96,27 @@
             </div>
         </div>
     </section>
-    
-    
-    
-    
+
+
+    <style>
+        df-messenger {
+            --df-messenger-bot-message: #878fac;
+            --df-messenger-button-titlebar-color: #000;
+            --df-messenger-chat-background-color: #fafafa;
+            --df-messenger-font-color: white;
+            --df-messenger-send-icon: #878fac;
+            --df-messenger-user-message: #147efb;
+        }
+    </style>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger intent="WELCOME"
+                  chat-title="ExcavationBot"
+                  agent-id="1fe45ae9-0eb8-41dd-a6b7-d17077b5bc73"
+                  language-code="en"
+                  chat-icon="https://www.flaticon.com/svg/static/icons/svg/1041/1041916.svg"></df-messenger>
+
+
+
     <!-- Core theme JS-->
     <script src="~/HomePage/js/scripts.js"></script>
 </divBody>
