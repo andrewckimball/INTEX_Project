@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using INTEXII_App.Models.ViewModels;
+using INTEXII_App.Models;
 
 namespace INTEXII_App.Infrastructure
 {
@@ -26,6 +27,7 @@ namespace INTEXII_App.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
         public PagingInfo PageModel { get; set; }
+        public Filters Filters { get; set; }
         public string PageAction { get; set; }
 
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
@@ -42,13 +44,50 @@ namespace INTEXII_App.Infrastructure
 
             TagBuilder result = new TagBuilder("div");
 
-            for (int i = 1; i <= PageModel.TotalPages; i++)
+            TagBuilder tag = new TagBuilder("a");
+
+            // First Page
+            if(PageModel.TotalPages > 3)
             {
-                TagBuilder tag = new TagBuilder("a");
+                if (PageModel.CurrentPage > 2)
+                {
+                    tag = new TagBuilder("a");
+
+                    PageUrlValues["page"] = 1;
+                    tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
+                    if (PageClassesEnabled)
+                    {
+                        tag.AddCssClass(PageClass);
+                        tag.AddCssClass(1 == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
+                    }
+
+                    tag.InnerHtml.Append(1.ToString());
+
+                    result.InnerHtml.AppendHtml(tag);
+                    result.InnerHtml.AppendHtml(" ... ");
+                }
+            }
+            
+
+            int starti = PageModel.CurrentPage > 1 ? PageModel.CurrentPage - 1 : 1;
+            int endi = PageModel.CurrentPage < PageModel.TotalPages - 1 ? PageModel.CurrentPage + 1 : PageModel.TotalPages;
+            endi = PageModel.CurrentPage == 1 ? 3 : endi;
+            starti = PageModel.CurrentPage == PageModel.TotalPages ? starti = PageModel.TotalPages - 2 : starti;
+
+            if(PageModel.TotalPages <= 3)
+            {
+                starti = 1;
+                endi = PageModel.TotalPages;
+            }
+
+            // Three pages from current page
+            for (int i = starti; i <= endi; i++)
+            {
+                tag = new TagBuilder("a");
 
                 PageUrlValues["page"] = i;
-                tag.Attributes["href"] = urlHelper.Action(PageAction,
-                    PageUrlValues);
+                tag.Attributes["href"] = urlHelper.Action(PageAction,PageUrlValues);
 
                 if (PageClassesEnabled)
                 {
@@ -59,6 +98,28 @@ namespace INTEXII_App.Infrastructure
                 tag.InnerHtml.Append(i.ToString());
 
                 result.InnerHtml.AppendHtml(tag);
+            }
+
+            if (PageModel.TotalPages > 3)
+            {
+                if (PageModel.CurrentPage < PageModel.TotalPages - 2)
+                {
+                    tag = new TagBuilder("a");
+
+                    PageUrlValues["page"] = PageModel.TotalPages;
+                    tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
+                    if (PageClassesEnabled)
+                    {
+                        tag.AddCssClass(PageClass);
+                        tag.AddCssClass(PageModel.TotalPages == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
+                    }
+
+                    tag.InnerHtml.Append(PageModel.TotalPages.ToString());
+
+                    result.InnerHtml.AppendHtml(" ... ");
+                    result.InnerHtml.AppendHtml(tag); 
+                }
             }
 
             output.Content.AppendHtml(result.InnerHtml);

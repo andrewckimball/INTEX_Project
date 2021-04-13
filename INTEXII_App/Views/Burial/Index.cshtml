@@ -14,18 +14,24 @@
 
 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
-    <a class="btn btn-primary"
+<a class="btn btn-primary"
    style="position: fixed; right: 2rem; bottom: 5rem; z-index: 100;"
    asp-controller="Burial"
-   asp-action="Create"><img src="~/img/plus-circle.svg"/> Add Burial</a>
-}
+   asp-action="Create"><img src="~/img/plus-circle.svg" /> Add Burial</a>}
 
-@*<div style="display:flex; justify-content:flex-end;">*@
-    <label for="trigger" class="btn btn-primary">Filter</label>
-    <input id="trigger" class="hidden" type="checkbox">
-@*</div>*@
 
-@*FILTER FORM*@
+<label for="trigger" class="btn btn-primary">Filter</label>
+<input id="trigger" class="hidden" type="checkbox">
+
+<!--<form asp-controller="Burial" asp-action="Index">
+    <select onchange="this.form.submit()">
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+</form>-->
+
+<!--FILTER FORM-->
 <div class="box container">
     <div class="">
         <form asp-controller="Burial" asp-action="Filter" method="post">
@@ -38,19 +44,18 @@
                             @{ if (ViewBag.Filters.Square == "")
                                 {
                                     ViewBag.DisplayString = "";
-                                }  
+                                }
                                 else
                                 {
                                     Square square = Model.Squares.Where(x => x.SquareId.ToString() == squareid).FirstOrDefault();
                                     ViewBag.DisplayString = @square.LowPairNs.ToString() + "/" + square.HighPairNs.ToString() + " " + square.BurialLocationNs + " " + square.LowPairEw.ToString() + "/" + square.HighPairEw.ToString() + " " + square.BurialLocationEw.ToString();
-                                }
-                            }
+                                } }
                             @ViewBag.DisplayString
                         </option>
 
                         @foreach (Square s in ViewBag.Square)
                         {
-                            <option value="@s.SquareId">@s.LowPairNs/@s.HighPairNs  @s.BurialLocationNs @s.LowPairEw/@s.HighPairEw @s.BurialLocationEw</option>
+                                    <option value="@s.SquareId">@s.LowPairNs/@s.HighPairNs  @s.BurialLocationNs @s.LowPairEw/@s.HighPairEw @s.BurialLocationEw</option>
                         }
                     </select>
                 </div>
@@ -140,7 +145,7 @@
                 <button type="submit" class="btn btn-primary">Apply</button>
                 <a asp-controller="Burial" asp-action="Index" asp-route-id="" class="btn">Clear</a>
             </div>
-       
+
 
         </form>
     </div>
@@ -168,57 +173,53 @@
                 <tbody class="burial-table-body">
                     @foreach (var item in Model.Burials)
                     {
-                        
-                        <tr>
-                                <td class="row-count-column"><a asp-action="Details" asp-route-id="@item.BurialId"><img src="~/img/info-circle.svg"/></a></td>
-                                <td class="burial-table-columns">
 
-                                    @{ViewBag.TempSquare = Model.Squares.Where(x => item.SquareId == x.SquareId).FirstOrDefault();}
-                                    @ViewBag.TempSquare.LowPairNs/@ViewBag.TempSquare.HighPairNs @ViewBag.TempSquare.BurialLocationNs
-                                    @ViewBag.TempSquare.LowPairEw/@ViewBag.TempSquare.HighPairEw @ViewBag.TempSquare.BurialLocationEw
+        <tr>
+            <td class="row-count-column"><a asp-action="Details" asp-route-id="@item.BurialId"><img src="~/img/info-circle.svg" /></a></td>
+            <td class="burial-table-columns">
 
-                                </td>
-                                <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
-                                <td class="burial-table-columns">@item.BurialNumber</td>
-                                <td class="burial-table-columns">@item.Depth</td>
-                                <td class="burial-table-columns">@item.PhotoTaken</td>
-                                <td class="burial-table-columns">@item.BurialGoods</td>
+                @{ViewBag.TempSquare = Model.Squares.Where(x => item.SquareId == x.SquareId).FirstOrDefault();}
+                @ViewBag.TempSquare.LowPairNs/@ViewBag.TempSquare.HighPairNs @ViewBag.TempSquare.BurialLocationNs
+                @ViewBag.TempSquare.LowPairEw/@ViewBag.TempSquare.HighPairEw @ViewBag.TempSquare.BurialLocationEw
 
-                                @if (!String.IsNullOrEmpty(item.Description))
-                                {
-                                    if (@item.Description.Length >= 30)
-                                    {
-                                        <td class="burial-table-columns">@item.Description.Substring(0, 30) ...</td> }
-                                    else
-                                    {
-                                        <td class="burial-table-columns">@item.Description ...</td>
-                                    }
-                                }
-                                else
-                                {
-                                <td></td>}
-                            
-                        </tr>
-                        
-                            @*<td class="burial-table-columns">
-                                <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
-                            </td>*@
-                        Model.RowCounter++;
+            </td>
+            <td class="burial-table-columns">@Model.Areas.Where(x => x.AreaId == item.AreaId).FirstOrDefault().Area1</td>
+            <td class="burial-table-columns">@item.BurialNumber</td>
+            <td class="burial-table-columns">@item.Depth</td>
+            <td class="burial-table-columns">@item.PhotoTaken</td>
+            <td class="burial-table-columns">@item.BurialGoods</td>
 
-                    }
+            @if (!String.IsNullOrEmpty(item.Description))
+            {
+                if (@item.Description.Length >= 30)
+                                        {
+                        <td class="burial-table-columns">@item.Description.Substring(0, 30) ...</td> }
+                                            else
+                                            {
+                        <td class="burial-table-columns">@item.Description ...</td>
+                            }
+                        }
+                        else
+                        {
+                        <td></td>}
+
+                                </tr>
+                                Model.RowCounter++;
+
+                            }
                 </tbody>
             </table>
 
         </div>
 
-        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-             page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary"
-             class="btn-group pull-right m-1">
-        </div>
+        
 
+    </div>
+
+    <div class="text-center" page-model="@Model.PagingInfo" asp-route-page="@Model.PagingInfo.CurrentPage"  page-url-id="@Model.Filters.FilterString" page-action="Index" page-classes-enabled="true" page-class="btn m-1 mt-4"
+        page-class-normal="btn-outline-dark"
+        page-class-selected="btn-primary"
+        class="btn-group pull-right m-1">
     </div>
 </div>
 

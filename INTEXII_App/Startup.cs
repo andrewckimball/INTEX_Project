@@ -73,6 +73,18 @@ namespace INTEXII_App
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute("filter",
+                //    "Burial/Index/{filters}",
+                //    new { controller = "Burial", action = "Index" });
+
+                //endpoints.MapControllerRoute("filternpnopage",
+                //    "Burial/Index/{filters}",
+                //    new { controller = "Burial", action = "Filter", page = 1 });
+
+                //endpoints.MapControllerRoute("filternpnopage",
+                //    "Burial/Index/{page}",
+                //    new { controller = "Burial", action = "Index" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
