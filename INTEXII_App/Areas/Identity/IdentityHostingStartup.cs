@@ -18,8 +18,7 @@ namespace INTEXII_App.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<AuthDbContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("AuthDbContextConnection")));
+                    options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStringsDBAuth")));
 
 
                 services.AddDefaultIdentity<ApplicationUser>(options =>
