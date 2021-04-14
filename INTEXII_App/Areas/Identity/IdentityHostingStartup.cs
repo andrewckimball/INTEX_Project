@@ -18,7 +18,7 @@ namespace INTEXII_App.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<AuthDbContext>(options =>
-                    options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStringsDBAuth")));
+                    options.UseSqlServer("Server = intexii-db.cbixfz3dr1wn.us-east-1.rds.amazonaws.com; Database = LoginUsers; User Id= Group410; Password = group410isthebestintheentireworld; MultipleActiveResultSets = true;"));
 
 
                 services.AddDefaultIdentity<ApplicationUser>(options =>
