@@ -77,7 +77,6 @@ namespace INTEXII_App.Controllers
             }
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", img.BurialId);
             
-<<<<<<< HEAD
             using (var memoryStream = new MemoryStream())
             {
                 await viewModel.fileForm.CopyToAsync(memoryStream);
@@ -90,20 +89,7 @@ namespace INTEXII_App.Controllers
                 {
                     ModelState.AddModelError("File", "The file is too large.");
                 }
-=======
-            using (var memoryStream = new MemoryStream())
-            {
-                await viewModel.fileForm.CopyToAsync(memoryStream);
-                // Upload the file if less than 10 MB
-                if (memoryStream.Length < 10485760)
-                {
-                    await S3Upload.UploadFileAsync(memoryStream, "arn:aws:s3:us-east-1:524546685232:accesspoint/is410", objectKey);
-                }
-                else
-                {
-                    ModelState.AddModelError("File", "The file is too large.");
-                }
->>>>>>> eafb95201bf33ccfb4f736ce7dbd85b483ab0f6e
+
             }
 
             return RedirectToAction("Details", "Burial", new { ID = viewModel.BurialId });

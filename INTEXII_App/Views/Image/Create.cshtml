@@ -6,44 +6,15 @@
 <link href="~/UploadImage/StyleSheet.css" rel="stylesheet" />
 <br />
 <br />
-<<<<<<< HEAD
-<h1>Upload Image</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Image" asp-action="Create" enctype="multipart/form-data" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BurialId" class="control-label" >Burial ID</label>
-                <input asp-for="BurialId" class="form-control" value="@ViewBag.burialid" readonly>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="ImagePodecimaler" class="control-label"></label>
-                <input asp-for="ImagePodecimaler" class="form-control" />
-                <span asp-validation-for="ImagePodecimaler" class="text-danger"></span>
-            </div>
 
-            <!--File upload input-->
-            <dl>
-                <dt>
-                    <label asp-for="fileForm"></label>
-                </dt>
-                <dd>
-                    <input asp-for="fileForm" type="file">
-                </dd>
-            </dl>
-            <input asp-page-handler="Upload" class="btn btn-primary" type="submit" value="Upload">
-        </form>
-=======
+
 <div style="margin: auto; width: 40%;">
     <h1 class="text-center">Upload an Image</h1>
 
     <div style="margin:auto; width: 300px;">
         <script src="https://unpkg.com/@@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
         <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_z7DhMX.json" background="transparent" speed=".8" style="width: 300px; height: 200px;" autoplay></lottie-player>
->>>>>>> eafb95201bf33ccfb4f736ce7dbd85b483ab0f6e
     </div>
-
 
 
     <div class="text-center">
@@ -67,10 +38,7 @@
                         <label asp-for="fileForm" hidden></label>
                     </p>
                     <p>
-
-                        <input id="img_file" asp-for="fileForm" type="file" onChange="img_pathUrl(this); namethis()" style="width: 85px;" accept=".png, .jpg, .pdf">
-
-
+                        <input id="img_file" asp-for="fileForm" type="file" onChange="img_pathUrl(this); namethis()" style="width: 105px;" accept=".png, .jpg, .pdf">
                     </p>
                 </div>
                 <input asp-page-handler="Upload" class="btn btn-success" type="submit" value="Upload">
