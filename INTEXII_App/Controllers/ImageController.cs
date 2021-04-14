@@ -98,7 +98,7 @@ namespace INTEXII_App.Controllers
             }
 
             return RedirectToAction("Details", "Burial", new { ID = viewModel.BurialId });
-
+            
 
         }
 

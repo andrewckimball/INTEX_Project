@@ -39,13 +39,11 @@
             <button type="submit" class="btn btn-primary">Forget this browser</button>
         </form><br />
     }
-    @*<a asp-page="./Disable2fa" class="btn btn-default">Disable 2FA</a>
-        <a asp-page="./GenerateRecoveryCodes" class="btn btn-default">Reset recovery codes</a>*@
 }
 
 <br />
 
-@* Check if the user has authentication and 2factor enabled *@
+@* Check if the user has authentication and 2factor enabled - Direct new users to dual authentication set up*@
 @if (!Model.HasAuthenticator)
 {
     <h6>We highly recommend setting up an Authenticator app with your new account before proceeding</h6>
