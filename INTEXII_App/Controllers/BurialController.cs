@@ -179,7 +179,7 @@ namespace INTEXII_App.Controllers
         public IActionResult Create()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "Area1");
-            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "BurialLocationEw");
+            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "SquareId");
             return View();
         }
 
@@ -197,7 +197,7 @@ namespace INTEXII_App.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "Area1", burial.AreaId);
-            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "BurialLocationEw", burial.SquareId);
+            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "SquareId", burial.SquareId);
             return View(burial);
         }
 
@@ -216,7 +216,7 @@ namespace INTEXII_App.Controllers
                 return NotFound();
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "Area1", burial.AreaId);
-            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "BurialLocationEw", burial.SquareId);
+            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "SquareId", burial.SquareId);
             return View(burial);
         }
 
@@ -254,7 +254,7 @@ namespace INTEXII_App.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "Area1", burial.AreaId);
-            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "BurialLocationEw", burial.SquareId);
+            ViewData["SquareId"] = new SelectList(_context.Squares, "SquareId", "SquareId", burial.SquareId);
             return View(burial);
         }
 

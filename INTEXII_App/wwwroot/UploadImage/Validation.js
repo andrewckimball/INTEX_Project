@@ -8,9 +8,13 @@ function namethis(e) {
         case 'jpeg':
         case 'png':
         case 'pdf':
+        case 'JPG':
+        case 'JPEG':
+        case 'PNG':
+        case 'PDF':
             break;
         default:
-            alert('File not allowed, please select an image with the extension of .png., .jpg, .pdf');
+            alert('File not allowed, please select an image with the extension of .png, .jpg, .pdf');
             document.getElementById('img_file').value = '';
     }
 };
