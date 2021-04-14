@@ -66,7 +66,7 @@ namespace INTEXII_App.Infrastructure
                     tag.InnerHtml.Append(1.ToString());
 
                     result.InnerHtml.AppendHtml(tag);
-                    result.InnerHtml.AppendHtml(" << ");
+                    result.InnerHtml.AppendHtml(" ... ");
                 }
             }
             
@@ -120,7 +120,7 @@ namespace INTEXII_App.Infrastructure
 
                     tag.InnerHtml.Append(PageModel.TotalPages.ToString());
 
-                    result.InnerHtml.AppendHtml(" >> ");
+                    result.InnerHtml.AppendHtml(" ... ");
                     result.InnerHtml.AppendHtml(tag); 
                 }
             }
