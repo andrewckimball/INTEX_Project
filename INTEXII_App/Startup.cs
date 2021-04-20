@@ -37,7 +37,7 @@ namespace INTEXII_App
 
             services.AddDbContext<BYU_ExcavationContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:ExcavationConnectionString"]);
+                options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStringsDB"));
             });
 
             //trying to figure out login rn
