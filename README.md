@@ -1,4 +1,4 @@
-# INTEX Application
+# INTEX Project
 
 As part of the Junior Core coursework in the Information Systems program at BYU, I partnered with 3 other Information Systems students to develop a web application for the Ancient Religious Studies Department at BYU.
 
