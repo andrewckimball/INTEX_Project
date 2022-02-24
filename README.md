@@ -6,4 +6,4 @@ This project was built in C# using ASP.NET Core. The purpose of the website was 
 
 Out of over 200 Information Systems Students and 50+ differennt projects, we won the competition with the highest overall score, judjed from over a dozen industry professionals, BYU Information Systems professors, and BYU researchers. 
 
-For more information about the project, refer to this document ([https://docs.google.com/document/d/1AGk8MTX9KsjcKoZOHEKmK9iua_V0xAkEKU6gHVamDW4/edit?usp=sharing])
+For more information about the project, refer to this document (https://docs.google.com/document/d/1AGk8MTX9KsjcKoZOHEKmK9iua_V0xAkEKU6gHVamDW4/edit?usp=sharing]
